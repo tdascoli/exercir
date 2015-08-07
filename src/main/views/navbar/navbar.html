@@ -1,0 +1,37 @@
+<div id="navbar" class="navbar navbar-inverse" role="navigation" ui-view="navbar">
+
+    <div>
+        <navbar-header navbar-title="global.title" brand-image="assets/images/logo_ch.png"></navbar-header>
+
+        <!--all you need is navbar-items [& optional item-add-type]-->
+        <navbar-collapse class="pull-right" navbar-items item-add-type="prepend">
+
+            <!--language switch-->
+            <navbar-menu-dropdown menu-glyph="flag"
+                                  menu-title="global.menu.language"
+                                  ng-controller="LanguageCtrl">
+                <li active-menu="{{language}}" ng-repeat="language in languages">
+                    <a href="" ng-click="changeLanguage(language)">{{'language.' + language| translate}}</a>
+                </li>
+            </navbar-menu-dropdown>
+
+
+            <!--login-->
+            <navbar-menu-item anonymous menu-sref="login" menu-glyph="log-in"
+                              menu-title="global.menu.account.login"></navbar-menu-item>
+
+            <!--logout-->
+            <li ui-sref-active="active" authenticated ng-controller="SecurityCtrl">
+                <a href="" ng-click="logout()">
+                    <span class="glyphicon glyphicon-log-out"></span>
+                    &#xA0;<span translate="global.menu.account.logout">Log out</span>
+                </a>
+            </li>
+
+        </navbar-collapse>
+    </div>
+    <!--[if lt IE 10]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+        your browser</a> to improve your experience.</p>
+    <![endif]-->
+</div>

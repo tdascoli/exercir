@@ -1,0 +1,31 @@
+{
+    "global": {
+        "title": "exercir",
+        "browsehappy": "[FR] You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
+        "menu": {
+            "home": "[FR] Home",
+            "account": {
+                "books": "[FR] Books",
+                "login": "[FR] Login",
+                "logout": "[FR] Logout"
+            }
+        }
+    },
+    "entity": {
+        "action": {
+            "back": "[FR] Back",
+            "cancel": "[FR] Cancel",
+            "delete": "[FR] Delete",
+            "edit": "[FR] Edit",
+            "save": "[FR] Save",
+            "view": "[FR] Show"
+        },
+        "detail": {
+            "field": "[FR] Field",
+            "value": "[FR] Value"
+        },
+        "delete": {
+            "title": "[FR] Confirm deletion"
+        }
+    }
+}
