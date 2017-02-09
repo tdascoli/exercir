@@ -1,6 +1,8 @@
 // bower:scss
 // endbower
 
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -10,6 +12,88 @@
 
 body {
   padding: 0;
+  font-family: 'Montserrat';
+}
+
+// reset bootstrap
+.container {
+  padding: 0;
+}
+.navbar {
+  border-radius: 0;
+  // reset unigrid
+  height: auto !important;
+}
+.navbar-brand {
+  float: none;
+  height: auto;
+  padding: 0;
+}
+.navbar > .container .navbar-brand {
+  margin-left: 0;
+}
+.form-group label {
+  margin-bottom: 0;
+  padding-bottom: 0 !important;
+}
+.form-control {
+  //border-radius: 0;
+  //height: auto;
+}
+.checkbox > input:checked ~ label:after {
+  left: 9px !important;
+  width: 6px !important;
+}
+.radio > input:checked ~ label:after {
+  left: 6px !important;
+  top: 4px !important;
+  height: 11px !important;
+  width: 11px !important;
+}
+.fake-label {
+  width: 100%;
+  display: block;
+  font-weight: 700;
+  padding: 6px 0 0 0;
+  line-height: 23px;
+}
+.img--auto {
+  height: auto !important;
+}
+
+/* tags */
+tags-input .host {
+  margin: 0;
+}
+tags-input .tags {
+  padding: 4px;
+  border: 2px solid #333;
+  font-size: 14px;
+  line-height: 23px;
+}
+tags-input .tags .tag-item {
+  margin: 0 2px;
+  padding: 0 5px;
+  display: inline-block;
+  float: left;
+  font-family: 'Montserrat';
+  height: 26px;
+  line-height: 23px;
+  border: 1px solid #acacac;
+  border-radius: 0;
+  background: silver;
+}
+tags-input .tags .tag-item.selected {
+  background: #ff5c5c;
+}
+tags-input .tags .input {
+  border: 0;
+  outline: none;
+  margin: 0 2px;
+  padding: 0 0 0 5px;
+  float: left;
+  height: 26px;
+  font-family: 'Montserrat';
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -62,28 +146,5 @@ body {
 
   p + h4 {
     margin-top: 28px;
-  }
-}
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
-
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
   }
 }

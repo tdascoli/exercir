@@ -1,0 +1,75 @@
+<h1>exercises</h1>
+
+<div class="unigrid--row">
+  <div class="brick brick--12">
+    <div class="form-required form-group">
+      <label for="exercise.name">Name</label>
+      <input type="text" name="exercise.name" id="exercise.name" class="form-control" ng-model="exercise.name" />
+    </div>
+  </div>
+  <div class="brick brick--12">
+    <div class="form-required form-group">
+      <label>Trainingsinhalt</label>
+      <tags-input ng-model="exercise.content">
+        <auto-complete source="loadTags($query)"></auto-complete>
+      </tags-input>
+    </div>
+  </div>
+</div>
+
+<div class="unigrid--row">
+  <div class="brick brick--8">
+    <span class="fake-label">Grafik</span>
+    <img class="img--auto" src="images/torschuss.jpg" />
+  </div>
+  <div class="brick brick--8">
+    <div class="form-required form-group" style="height: 100%">
+      <label>Beschreibung</label>
+      <textarea class="form-control" style="height: calc(100% - 48px);"  ng-model="exercise.description"></textarea>
+    </div>
+  </div>
+  <div class="brick brick--8">
+    <div class="form-group" style="height: calc(50% - 10px);">
+      <label for="exercise.aufbau">Aufbau</label>
+      <textarea style="height: calc(100% - 38px);" class="form-control" id="exercise.aufbau" ng-model="exercise.aufbau"></textarea>
+    </div>
+
+    <div class="form-required form-group" style="height: calc(50% - 10px);">
+      <label for="exercise.coaching">Coaching</label>
+      <textarea style="height: calc(100% - 38px);" class="form-control" id="exercise.coaching" ng-model="exercise.coaching"></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="unigrid--row">
+  <div class="brick brick--12">
+    <div class="form-group">
+      <label>Variationen</label>
+      <textarea rows="3" class="form-control" ng-model="exercise.variationen"></textarea>
+    </div>
+  </div>
+  <div class="brick brick--12">
+    <div class="form-group">
+      <label for="exercise.bemerkungen">Bemerkungen</label>
+      <textarea rows="3" class="form-control" id="exercise.bemerkungen" ng-model="exercise.bemerkungen"></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="unigrid--row">
+  <div class="brick brick--3">
+    <button type="submit" ng-click="saveExercise()">Speichern</button>
+  </div>
+  <div class="brick brick--3">
+    <button>Abrechen</button>
+  </div>
+  <div class="brick brick--18">
+    <div class="checkbox">
+      <input type="checkbox" id="exercise.test" />
+      <label for="exercise.test">Test</label>
+    </div>
+  </div>
+</div>
+
+<pre>{{ exercise | json }}</pre>
+
