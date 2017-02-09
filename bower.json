@@ -1,101 +1,29 @@
 {
-    "name": "exercir",
-    "version": "0.0.1",
-    "ignore": [
-        ".idea",
-        "components",
-        "node_modules",
-        "test",
-        ".bowerrc",
-        ".gitignore",
-        ".jshintignore",
-        ".jshintrc",
-        "*.iml",
-        "bower.json",
-        "Gruntfile.js",
-        "package.json",
-        "README.md"
-    ],
-  "appPath": "src/main",
-  "testPath": "src/test/unit",
+  "name": "exercir",
+  "version": "0.0.0",
   "dependencies": {
-    "jquery": "2.1.1",
-    "angular": "1.3.4",
-    "alv-ch-ng.core": "0.2.0",
-    "alv-ch-ng.forms": "0.2.0",
-    "alv-ch-ng.scroll": "0.2.0",
-    "alv-ch-ng.security": "0.2.1",
-    "alv-ch-ng.style": "0.2.1",
-    "angular-ui-router": "0.2.13",
-    "angular-resource": "1.3.14",
-    "angular-cookies": "1.3.4",
-    "angular-sanitize": "1.3.4",
-    "angular-translate": "2.4.2",
-    "angular-translate-storage-cookie": "2.4.2",
-    "angular-translate-loader-partial": "2.4.2",
-    "angular-dynamic-locale": "0.1.21",
-    "angular-local-storage": "0.1.5",
-    "angular-i18n": "1.3.4",
-    "angular-cache-buster": "0.4.3"
+    "angular": "^1.4.0",
+    "bootstrap": "^3.2.0",
+    "angular-animate": "^1.4.0",
+    "angular-aria": "^1.4.0",
+    "angular-cookies": "^1.4.0",
+    "angular-messages": "^1.4.0",
+    "angular-resource": "^1.4.0",
+    "angular-route": "^1.4.0",
+    "angular-sanitize": "^1.4.0",
+    "angular-touch": "^1.4.0"
   },
   "devDependencies": {
-    "angular-mocks": "1.3.4",
-    "angular-scenario": "1.3.4"
+    "angular-mocks": "^1.4.0"
   },
-  "resolutions": {
-    "angular": "1.3.4",
-    "angular-translate": "2.4.2",
-    "jquery": "2.1.1"
-  },
+  "appPath": "app",
+  "moduleName": "exercirApp",
   "overrides": {
-    "angular-ui-bootstrap": {
+    "bootstrap": {
       "main": [
-        "src/typeahead/typeahead.js",
-        "src/tooltip/tooltip.js",
-        "src/position/position.js",
-        "src/bindHtml/bindHtml.js"
-      ]
-    },
-    "alv-ch-ng.core": {
-      "main": [
-        "dist/alv-ch-ng.core.js",
-        "dist/css/core.css"
-      ]
-    },
-    "alv-ch-ng.forms": {
-      "main": [
-        "dist/alv-ch-ng.forms.js",
-        "dist/css/forms.css"
-      ]
-    },
-    "alv-ch-ng.scroll": {
-      "main": [
-        "dist/alv-ch-ng.scroll.js",
-        "dist/css/scroll.css"
-      ]
-    },
-    "alv-ch-ng.security": {
-      "main": [
-        "dist/alv-ch-ng.security.js"
-      ]
-    },
-    "alv-ch-ng.selectpicker": {
-      "main": [
-        "dist/alv-ch-ng.selectpicker.js",
-        "dist/css/selectpicker.css"
-      ]
-    },
-    "alv-ch-ng.style": {
-      "main": [
-        "dist/css/admin-symbols.css",
-        "dist/css/alv-ch-ng.bootstrap.css",
-        "dist/css/frutiger.css"
-      ]
-    },
-    "alv-ch-ng.text-truncate": {
-      "main": [
-        "alv-ch-ng.textTruncate.js",
-        "dist/css/textTruncate.css"
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
       ]
     }
   }
