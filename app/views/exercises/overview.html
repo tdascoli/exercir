@@ -1,0 +1,11 @@
+<h1>exercises - overview</h1>
+
+<div class="deck-list">
+  <div class="deck" ng-repeat="exercise in exercises">
+    <a ui-sref="exercises/exercise({exerciseId: exercise.$id})">{{ exercise.name }}</a>
+  </div>
+
+  <div class="deck create">
+    <a ui-sref="exercises/create">+ create deck</a>
+  </div>
+</div>

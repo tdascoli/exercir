@@ -35,23 +35,43 @@ var app = angular.module('exercirApp', [
       .state('home', {
         url: '/home',
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        controller: 'MainCtrl'
       })
       .state('about', {
         url: '/about',
         templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+        controller: 'AboutCtrl'
       })
       .state('exercises', {
         url: '/exercises',
-        templateUrl: 'views/exercises/exercises.html',
+        templateUrl: 'views/exercises/overview.html',
         controller: 'ExercisesCtrl',
-        controllerAs: 'exercises',
         resolve: {
-          exercises: function (Exercises){
-            return Exercises.$loaded();
+          exercises: function (Exercises,Auth){
+            return Auth.$requireSignIn().then(function(auth){
+              return Exercises.getUserExercises(auth.uid);
+            });
+          },
+          profile: function ($rootScope, $state, Auth, Users){
+            return Auth.$requireSignIn().then(function(auth){
+              return Users.getProfile(auth.uid).$loaded().then(function (profile){
+                $rootScope.profile = profile;
+              });
+            }, function(error){
+              $state.go('login');
+            });
+          }
+        }
+      })
+      .state('exercises/create', {
+        url: '/exercises/create',
+        templateUrl: 'views/exercises/editor.html',
+        controller: 'ExercisesCtrl',
+        resolve: {
+          exercises: function (Exercises,Auth){
+            return Auth.$requireSignIn().then(function(auth){
+              return Exercises.getUserExercises(auth.uid);
+            });
           },
           profile: function ($rootScope, $state, Auth, Users){
             return Auth.$requireSignIn().then(function(auth){
@@ -67,8 +87,12 @@ var app = angular.module('exercirApp', [
       .state('trainings', {
         url: '/trainings',
         templateUrl: 'views/trainings/trainings.html',
+        controller: 'MainCtrl'
+      })
+      .state('reviews', {
+        url: '/reviews',
         controller: 'MainCtrl',
-        controllerAs: 'main'
+        templateUrl: 'views/reviews/reviews.html'
       })
       .state('login', {
         url: '/login',

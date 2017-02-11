@@ -20,7 +20,7 @@ The surrounding division has to clear the floating though. */
 .form-group,
 .pifa-form div {
   display: block;
-  margin-bottom: 10px; }
+  margin-bottom: 5px; }
 
 .form-group label,
 .pifa-form label {
@@ -44,7 +44,8 @@ gov.uk: dont indicate obligatory fields, indicate OPTIONAL fields!*/
 .pifa-field-lbl:after {
   content: ' (optional)'; }
 
-.pifa-obligatory .pifa-field-lbl:after {
+.pifa-obligatory .pifa-field-lbl:after,
+.form-required label:after {
   content: ''; }
 
 .checkbox_wrapper {
@@ -153,7 +154,7 @@ div.pifa-error {
   display: block;
   position: relative;
   padding-left: 33px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   cursor: pointer; }
 
 .checkbox > label::before {

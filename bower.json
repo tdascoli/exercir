@@ -20,7 +20,8 @@
     "detect-mobile-browser": "latest",
     "moment": "latest",
     "ng-lodash": "latest",
-    "ng-tags-input":"latest"
+    "ng-tags-input":"latest",
+    "showdown":"latest"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

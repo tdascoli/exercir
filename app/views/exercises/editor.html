@@ -1,10 +1,10 @@
 <h1>exercises</h1>
-
+<form>
 <div class="unigrid--row">
   <div class="brick brick--12">
     <div class="form-required form-group">
       <label for="exercise.name">Name</label>
-      <input type="text" name="exercise.name" id="exercise.name" class="form-control" ng-model="exercise.name" />
+      <input type="text" name="exercise.name" id="exercise.name" class="form-control" ng-model="exercise.name" required />
     </div>
   </div>
   <div class="brick brick--12">
@@ -25,7 +25,7 @@
   <div class="brick brick--8">
     <div class="form-required form-group" style="height: 100%">
       <label>Beschreibung</label>
-      <textarea class="form-control" style="height: calc(100% - 48px);"  ng-model="exercise.description"></textarea>
+      <textarea class="form-control" style="height: calc(100% - 48px);"  ng-model="exercise.description" required></textarea>
     </div>
   </div>
   <div class="brick brick--8">
@@ -34,7 +34,7 @@
       <textarea style="height: calc(100% - 38px);" class="form-control" id="exercise.aufbau" ng-model="exercise.aufbau"></textarea>
     </div>
 
-    <div class="form-required form-group" style="height: calc(50% - 10px);">
+    <div class="form-group" style="height: calc(50% - 10px);">
       <label for="exercise.coaching">Coaching</label>
       <textarea style="height: calc(100% - 38px);" class="form-control" id="exercise.coaching" ng-model="exercise.coaching"></textarea>
     </div>
@@ -61,7 +61,7 @@
     <button type="submit" ng-click="saveExercise()">Speichern</button>
   </div>
   <div class="brick brick--3">
-    <button>Abrechen</button>
+    <button>Abbrechen</button>
   </div>
   <div class="brick brick--18">
     <div class="checkbox">
@@ -70,6 +70,4 @@
     </div>
   </div>
 </div>
-
-<pre>{{ exercise | json }}</pre>
-
+</form>

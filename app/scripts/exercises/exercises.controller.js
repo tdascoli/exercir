@@ -13,6 +13,8 @@ angular.module('exercirApp')
       return $http.get('/tags?query=' + query);
     };
 
+    $scope.exercises=exercises;
+
     $scope.exercise={};
     $scope.exercise.content = [
       { text: 'just' },
@@ -24,7 +26,7 @@ angular.module('exercirApp')
 
     // SAVE
     $scope.saveExercise = function (){
-      exercises.$add($scope.exercise).then(function(ref){
+      $scope.exercises.$add($scope.exercise).then(function(ref){
         console.log('saved');
       });
     };

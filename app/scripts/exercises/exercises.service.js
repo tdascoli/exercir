@@ -4,5 +4,15 @@ angular.module('exercirApp')
     var ref = Ref.child('exercises');
     var exercises = $firebaseArray(ref);
 
-    return exercises;
+    var Exercises = {
+      getUserExercises: function(uid){
+        return $firebaseArray(ref.child(uid));
+      },
+      getExercise: function(uid,exerciseId){
+        return $firebaseObject(ref.child(uid).child(exerciseId));
+      },
+      exercises: exercises
+    };
+
+    return Exercises;
   });
