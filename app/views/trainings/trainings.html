@@ -1,55 +1,122 @@
 <h1>trainings</h1>
 
+<form>
 <div class="unigrid--row">
-  <div class="brick brick--8">
-    <div class="form-group">
-      <label for="exercise.name">Name</label>
-      <input type="text" name="exercise.name" id="exercise.name" class="form-control" required />
+  <div class="brick brick--4">
+    <div class="form-required form-group">
+      <label for="training.trainer">Trainer</label>
+      <input type="text" name="training.trainer" id="training.trainer" class="form-control" required />
     </div>
   </div>
-  <div class="brick brick--16">
-    <div class="form-group">
-      <label for="exercise.content">Trainingsinhalt</label>
-      <input type="text" name="exercise.content" id="exercise.content" class="form-control" required />
+  <div class="brick brick--4">
+    <div class="form-required form-group">
+      <label for="training.team">Team</label>
+      <div class="select">
+        <select name="training.team" id="training.team" required>
+          <option>Team 1</option>
+          <option>3. Liga</option>
+          <option>Junioren B</option>
+          <option>1. Mannschaft</option>
+          <option>YB Stadt FE-12</option>
+        </select>
+        <div class="select__arrow"></div>
+      </div>
+    </div>
+  </div>
+  <div class="brick brick--4">
+    <div class="form-required form-group">
+      <label for="training.date">Datum</label>
+      <input type="date" name="training.date" id="training.date" class="form-control" required />
+    </div>
+  </div>
+  <div class="brick brick--12">
+    <div class="form-required form-group">
+      <label>Trainingsinhalt</label>
+      <tags-input ng-model="training.content">
+        <auto-complete source="loadTags($query)"></auto-complete>
+      </tags-input>
     </div>
   </div>
 </div>
 
-<div class="unigrid--row">
-  <div class="brick brick--8">
-    <div class="form-group">
-      <label>Beschreibung</label>
-      <textarea rows="8" class="form-control" required></textarea>
-    </div>
-  </div>
-  <div class="brick brick--8">
-    <span class="fake-label">Grafik</span>
-    <img class="img--auto" src="images/torschuss.jpg" />
-  </div>
-  <div class="brick brick--8">
-    <div class="form-group">
-      <label for="exercise.aufbau">Aufbau</label>
-      <textarea rows="3" class="form-control" id="exercise.aufbau"></textarea>
-    </div>
 
-    <div class="form-group">
-      <label for="exercise.coaching">Coaching</label>
-      <textarea rows="3" class="form-control" id="exercise.coaching"></textarea>
+
+<div class="unigrid--row training__exercise-search">
+  <div class="brick brick--17">
+    SEARCH
+  </div>
+  <div class="brick brick--4">
+    <div class="form-required form-group">
+      <label for="training.exercise-1" class="sr-only" style="display: none;">Lektionsteil</label>
+      <div class="select">
+        <select name="training.exercise[]" id="training.exercise-1" required>
+          <option>Einstieg</option>
+          <option>G 1</option>
+          <option>G 2</option>
+          <option>G 3</option>
+          <option>G 4</option>
+          <option>A 1</option>
+          <option>A 2</option>
+          <option>A 3</option>
+          <option>A 4</option>
+          <option>Ausklang</option>
+        </select>
+        <div class="select__arrow"></div>
+      </div>
     </div>
+    <div class="form-required form-group">
+      <label for="training.dauer-1" class="sr-only" style="display: none;">Trainer</label>
+      <input type="number" name="training.dauer[]" id="training.dauer-1" class="form-control" placeholder="Dauer" required />
+    </div>
+  </div>
+  <div class="brick brick--3">
+    <button type="submit" style="width: 100%;">Hinzufügen</button>
   </div>
 </div>
 
-<div class="unigrid--row">
-  <div class="brick brick--8">
-    <span class="fake-label">Grafik</span>
-    <img class="img--auto" src="images/torschuss.jpg" />
-  </div>
-  <div class="brick brick--16">
-    <div class="form-group">
-      <label>Variationen</label>
-      <textarea rows="8" class="form-control"></textarea>
+<!-- overview: auto/scroll ?! -->
+<div class="training">
+
+  <div class="unigrid--row training__header">
+    <div class="brick brick--2">
+      <strong>Lektionsteile</strong>
+    </div>
+
+    <div class="brick brick--7">
+      <strong>Beschreibung</strong>
+    </div>
+    <div class="brick brick--6">
+      <strong>Organisation</strong>
+    </div>
+    <div class="brick brick--7">
+      <strong>Coaching</strong>
+    </div>
+
+    <div class="brick brick--2">
+      <strong>Dauer</strong>
     </div>
   </div>
+
+  <div class="unigrid--row training__exercise">
+    <div class="brick brick--2">
+      <strong>Lektionsteil</strong>
+    </div>
+
+    <div class="brick brick--7">
+      <strong>Beschreibung</strong>
+    </div>
+    <div class="brick brick--6">
+      <strong>Organisation</strong>
+    </div>
+    <div class="brick brick--7">
+      <strong>Coaching</strong>
+    </div>
+
+    <div class="brick brick--2">
+      <strong>Dauer</strong>
+    </div>
+  </div>
+
 </div>
 
 <div class="unigrid--row">
@@ -60,3 +127,18 @@
     </div>
   </div>
 </div>
+  <div class="unigrid--row">
+    <div class="brick brick--3">
+      <button type="submit" ng-click="saveExercise()">Speichern</button>
+    </div>
+    <div class="brick brick--3">
+      <button>Abbrechen</button>
+    </div>
+    <div class="brick brick--18">
+      <div class="checkbox">
+        <input type="checkbox" id="exercise.test" />
+        <label for="exercise.test">Test</label>
+      </div>
+    </div>
+  </div>
+</form>

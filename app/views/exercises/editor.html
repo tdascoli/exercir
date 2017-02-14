@@ -1,4 +1,13 @@
 <h1>exercises</h1>
+<div class="messages">
+  <span ng-show="picFile.result">Upload Successful</span>
+  <span class="err" ng-show="errorMsg">Upload: {{errorMsg}}</span>
+  <i ng-show="myForm.file.$error.maxSize">Upload: File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+</div>
+
+<div>
+  toolbar: <button ng-click="showHtml()"><i class="fa fa-eye" aria-hidden="true"></i></button>
+</div>
 <form>
 <div class="unigrid--row">
   <div class="brick brick--12">
@@ -19,24 +28,38 @@
 
 <div class="unigrid--row">
   <div class="brick brick--8">
-    <span class="fake-label">Grafik</span>
-    <img class="img--auto" src="images/torschuss.jpg" />
-  </div>
-  <div class="brick brick--8">
-    <div class="form-required form-group" style="height: 100%">
-      <label>Beschreibung</label>
-      <textarea class="form-control" style="height: calc(100% - 48px);"  ng-model="exercise.description" required></textarea>
+    <div class="upload">
+      <span class="fake-label">Grafik</span>
+
+      <img data-ng-src="{{exercise.graphic}}" data-err-src="images/torschuss.png" ng-if="exercise.graphic" class="upload__image" />
+      <img ng-if="picFile" ngf-thumbnail="picFile" class="upload__thumb">
+
+      <div class="upload__toolbar">
+        <div class="btn-default" ngf-select ng-model="picFile" ngf-multiple="false" accept="image/*" ngf-max-size="2MB" ngf-model-invalid="errorFile">Select File</div>
+
+        <button ng-click="picFile = null" ng-show="picFile">Remove</button>
+        <button ng-click="uploadPic(picFile)">Upload</button>
+      </div>
     </div>
   </div>
   <div class="brick brick--8">
-    <div class="form-group" style="height: calc(50% - 10px);">
+    <div class="form-required form-group form-group-full-height">
+      <label>Beschreibung</label>
+      <textarea class="form-control form-full-height"  ng-model="exercise.description" required ng-if="!showHtmlText"></textarea>
+      <div ng-bind-html="convertToHtml(exercise.description)" ng-show="showHtmlText" class="fake-input form-full-height"></div>
+    </div>
+  </div>
+  <div class="brick brick--8">
+    <div class="form-group form-group-half-height">
       <label for="exercise.aufbau">Aufbau</label>
-      <textarea style="height: calc(100% - 38px);" class="form-control" id="exercise.aufbau" ng-model="exercise.aufbau"></textarea>
+      <textarea class="form-control form-half-height" id="exercise.aufbau" ng-model="exercise.aufbau" ng-if="!showHtmlText"></textarea>
+      <div ng-bind-html="convertToHtml(exercise.aufbau)" ng-show="showHtmlText" class="fake-input form-half-height"></div>
     </div>
 
-    <div class="form-group" style="height: calc(50% - 10px);">
+    <div class="form-group form-group-half-height">
       <label for="exercise.coaching">Coaching</label>
-      <textarea style="height: calc(100% - 38px);" class="form-control" id="exercise.coaching" ng-model="exercise.coaching"></textarea>
+      <textarea class="form-control form-half-height" id="exercise.coaching" ng-model="exercise.coaching" ng-if="!showHtmlText"></textarea>
+      <div ng-bind-html="convertToHtml(exercise.coaching)" ng-show="showHtmlText" class="fake-input form-half-height"></div>
     </div>
   </div>
 </div>
@@ -45,13 +68,15 @@
   <div class="brick brick--12">
     <div class="form-group">
       <label>Variationen</label>
-      <textarea rows="3" class="form-control" ng-model="exercise.variationen"></textarea>
+      <textarea rows="3" class="form-control" ng-model="exercise.variationen" ng-if="!showHtmlText"></textarea>
+      <div ng-bind-html="convertToHtml(exercise.variationen)" ng-show="showHtmlText" class="fake-input"></div>
     </div>
   </div>
   <div class="brick brick--12">
     <div class="form-group">
       <label for="exercise.bemerkungen">Bemerkungen</label>
-      <textarea rows="3" class="form-control" id="exercise.bemerkungen" ng-model="exercise.bemerkungen"></textarea>
+      <textarea rows="3" class="form-control" id="exercise.bemerkungen" ng-model="exercise.bemerkungen" ng-if="!showHtmlText"></textarea>
+      <div ng-bind-html="convertToHtml(exercise.bemerkungen)" ng-show="showHtmlText" class="fake-input"></div>
     </div>
   </div>
 </div>

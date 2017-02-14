@@ -32,30 +32,23 @@ body {
 .navbar > .container .navbar-brand {
   margin-left: 0;
 }
-.form-group label {
-  margin-bottom: 0;
-  padding-bottom: 0 !important;
-}
-.form-control {
-  //border-radius: 0;
-  //height: auto;
-}
-.checkbox > input:checked ~ label:after {
-  left: 9px !important;
-  width: 6px !important;
-}
-.radio > input:checked ~ label:after {
-  left: 6px !important;
-  top: 4px !important;
-  height: 11px !important;
-  width: 11px !important;
-}
 .fake-label {
   width: 100%;
   display: block;
   font-weight: 700;
-  padding: 6px 0 0 0;
+  padding: 6px 0;
   line-height: 23px;
+}
+.fake-input {
+  width: calc(100% - 12px);
+  display: block;
+  padding: 4px;
+  border: 2px solid #333;
+  font-size: 14px;
+  line-height: 23px;
+}
+.fake-input * {
+  margin: 0;
 }
 .img--auto {
   height: auto !important;
@@ -100,6 +93,46 @@ tags-input .tags .input {
   float: left;
   height: 26px;
   font-family: 'Montserrat';
+}
+
+/* upload */
+.upload {
+  height:100%;
+  width: 100%;
+  position: relative;
+}
+.upload__image {
+  max-height: calc(100% - 48px);
+  width: 100%;
+}
+.upload__thumb {
+  height: 50%;
+  position: absolute;
+  bottom: 52px;
+  right: 0;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+.upload__toolbar {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5);
+  border-bottom: 2px solid black;
+  bottom: 0;
+  width: calc(100% - 12px);
+  padding: 6px;
+}
+
+/* forms */
+.form-group-full-height {
+  height:100%;
+}
+.form-full-height {
+  height: calc(100% - 48px);
+}
+.form-group-half-height {
+  height: calc(50% - 10px);
+}
+.form-half-height {
+  height: calc(100% - 38px);
 }
 
 /* Main marketing message and sign up button */

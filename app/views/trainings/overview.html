@@ -1,0 +1,12 @@
+<h1>trainings - overview</h1>
+
+<div class="deck-list">
+  <div class="deck" ng-repeat="training in trainings">
+    <a ui-sref="trainings/training({trainingId: training.$id})">{{ training.name }}</a>
+  </div>
+
+  <div class="deck create">
+    <a ui-sref="trainings/create">+ create training</a>
+    <a ui-sref="trainings/collection">+ create collection</a>
+  </div>
+</div>

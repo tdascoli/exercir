@@ -21,7 +21,8 @@
     "moment": "latest",
     "ng-lodash": "latest",
     "ng-tags-input":"latest",
-    "showdown":"latest"
+    "showdown":"latest",
+    "ng-file-upload":"latest"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

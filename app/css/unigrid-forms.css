@@ -94,7 +94,8 @@ is set to all form fields where <n> is its type id. */
 .pifa-field-14 input,
 input[type='submit'],
 input[type='button'],
-button {
+button,
+.btn-default {
   float: none;
   width: auto;
   display: inline-block;
@@ -120,7 +121,8 @@ button {
 /* BUTTONSUBMIT */
 .pifa-field-13 input,
 input[type='submit'],
-button[type='submit'] {
+button[type='submit'],
+.btn-primary {
   color: #fff;
   background-color: #337ab7;
   border-color: #337ab7;

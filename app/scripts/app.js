@@ -20,6 +20,7 @@ var app = angular.module('exercirApp', [
     'ngTouch',
     'ngLodash',
     'ngTagsInput',
+    'ngFileUpload',
     'ui.router',
     'ui.router.menus',
     'ui.bootstrap',
@@ -65,6 +66,27 @@ var app = angular.module('exercirApp', [
       })
       .state('exercises/create', {
         url: '/exercises/create',
+        templateUrl: 'views/exercises/editor.html',
+        controller: 'ExercisesCtrl',
+        resolve: {
+          exercises: function (Exercises,Auth){
+            return Auth.$requireSignIn().then(function(auth){
+              return Exercises.getUserExercises(auth.uid);
+            });
+          },
+          profile: function ($rootScope, $state, Auth, Users){
+            return Auth.$requireSignIn().then(function(auth){
+              return Users.getProfile(auth.uid).$loaded().then(function (profile){
+                $rootScope.profile = profile;
+              });
+            }, function(error){
+              $state.go('login');
+            });
+          }
+        }
+      })
+      .state('exercises/exercise', {
+        url: '/exercises/{exerciseId}',
         templateUrl: 'views/exercises/editor.html',
         controller: 'ExercisesCtrl',
         resolve: {
