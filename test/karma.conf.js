@@ -38,6 +38,7 @@ module.exports = function(config) {
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/detect-mobile-browser/detectmobilebrowser.js',
       'bower_components/moment/min/moment-with-locales.min.js',
+      'bower_components/angular-moment/angular-moment.js',
       'bower_components/ng-lodash/build/ng-lodash.js',
       'bower_components/ng-tags-input/ng-tags-input.js',
       'bower_components/showdown/dist/showdown.js',

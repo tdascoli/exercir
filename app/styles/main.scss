@@ -135,6 +135,35 @@ tags-input .tags .input {
   height: calc(100% - 38px);
 }
 
+/* trainings */
+/*.training__exercise-image,
+.brick > img.training__exercise-image {
+  width: auto;
+}*/
+.training__exercise p {
+  margin: 0;
+}
+
+.fancybox > .training__exercise-image {
+  height: 100%;
+}
+
+/* divers */
+.align--right {
+  text-align: right;
+}
+.tag-item {
+  margin: 0 2px;
+  padding: 0 5px;
+  display: inline-block;
+  font-family: 'Montserrat';
+  height: 26px;
+  line-height: 23px;
+  border: 1px solid #acacac;
+  border-radius: 0;
+  background: silver;
+}
+
 /* Main marketing message and sign up button */
 .jumbotron {
   text-align: center;

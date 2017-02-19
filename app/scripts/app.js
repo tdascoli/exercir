@@ -21,6 +21,7 @@ var app = angular.module('exercirApp', [
     'ngLodash',
     'ngTagsInput',
     'ngFileUpload',
+    'angularMoment',
     'ui.router',
     'ui.router.menus',
     'ui.bootstrap',
@@ -85,6 +86,27 @@ var app = angular.module('exercirApp', [
           }
         }
       })
+      .state('exercises/graphics', {
+        url: '/exercises/graphics',
+        templateUrl: 'views/exercises/graphics.html',
+        controller: 'ExercisesCtrl',
+        resolve: {
+          exercises: function (Exercises,Auth){
+            return Auth.$requireSignIn().then(function(auth){
+              return Exercises.getUserExercises(auth.uid);
+            });
+          },
+          profile: function ($rootScope, $state, Auth, Users){
+            return Auth.$requireSignIn().then(function(auth){
+              return Users.getProfile(auth.uid).$loaded().then(function (profile){
+                $rootScope.profile = profile;
+              });
+            }, function(error){
+              $state.go('login');
+            });
+          }
+        }
+      })
       .state('exercises/exercise', {
         url: '/exercises/{exerciseId}',
         templateUrl: 'views/exercises/editor.html',
@@ -108,8 +130,76 @@ var app = angular.module('exercirApp', [
       })
       .state('trainings', {
         url: '/trainings',
+        templateUrl: 'views/trainings/overview.html',
+        controller: 'TrainingsCtrl',
+        resolve: {
+          trainings: function (Trainings,Auth){
+            return Auth.$requireSignIn().then(function(auth){
+              return Trainings.getUserTrainings(auth.uid);
+            });
+          },
+          profile: function ($rootScope, $state, Auth, Users){
+            return Auth.$requireSignIn().then(function(auth){
+              return Users.getProfile(auth.uid).$loaded().then(function (profile){
+                $rootScope.profile = profile;
+              });
+            }, function(error){
+              $state.go('login');
+            });
+          }
+        }
+      })
+      .state('trainings/create', {
+        url: '/trainings/create',
         templateUrl: 'views/trainings/trainings.html',
-        controller: 'MainCtrl'
+        controller: 'TrainingsEditorCtrl',
+        resolve: {
+          trainings: function (Trainings,Auth){
+            return Auth.$requireSignIn().then(function(auth){
+              return Trainings.getUserTrainings(auth.uid);
+            });
+          },
+          exercises: function (Exercises,Auth){
+            return Auth.$requireSignIn().then(function(auth){
+              return Exercises.getUserExercises(auth.uid);
+            });
+          },
+          profile: function ($rootScope, $state, Auth, Users){
+            return Auth.$requireSignIn().then(function(auth){
+              return Users.getProfile(auth.uid).$loaded().then(function (profile){
+                $rootScope.profile = profile;
+              });
+            }, function(error){
+              $state.go('login');
+            });
+          }
+        }
+      })
+      .state('trainings/training', {
+        url: '/trainings/{trainingId}',
+        templateUrl: 'views/trainings/trainings.html',
+        controller: 'TrainingsEditorCtrl',
+        resolve: {
+          trainings: function (Trainings,Auth){
+            return Auth.$requireSignIn().then(function(auth){
+              return Trainings.getUserTrainings(auth.uid);
+            });
+          },
+          exercises: function (Exercises,Auth){
+            return Auth.$requireSignIn().then(function(auth){
+              return Exercises.getUserExercises(auth.uid);
+            });
+          },
+          profile: function ($rootScope, $state, Auth, Users){
+            return Auth.$requireSignIn().then(function(auth){
+              return Users.getProfile(auth.uid).$loaded().then(function (profile){
+                $rootScope.profile = profile;
+              });
+            }, function(error){
+              $state.go('login');
+            });
+          }
+        }
       })
       .state('reviews', {
         url: '/reviews',

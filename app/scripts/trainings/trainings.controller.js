@@ -2,7 +2,7 @@
   'use strict';
 
 angular.module('exercirApp')
-  .controller('ExercisesCtrl', function ($scope, $sce, $stateParams, $q, Ref, Upload, exercises) {
+  .controller('TrainingsCtrl', function ($scope, $sce, $stateParams, $q, Ref, moment, Upload, trainings) {
 
 
     $scope.loadTags = function(query) {
@@ -23,13 +23,13 @@ angular.module('exercirApp')
       });
     };
 
-    $scope.exercises = exercises;
+    $scope.trainings = trainings;
 
-    $scope.exercise = {};
-    $scope.exercise.timestamp = firebase.database.ServerValue.TIMESTAMP;
+    $scope.training = {};
+    $scope.training.timestamp = firebase.database.ServerValue.TIMESTAMP;
 
-    if ($stateParams.exerciseId !== undefined) {
-      $scope.exercise = $scope.exercises.$getRecord($stateParams.exerciseId);
+    if ($stateParams.trainingId !== undefined) {
+      $scope.training = $scope.trainings.$getRecord($stateParams.trainingId);
     }
 
     // MARKDOWN
@@ -43,23 +43,20 @@ angular.module('exercirApp')
       return $sce.trustAsHtml(converter.makeHtml(markdown));
     };
 
-    // UPLOAD
-    $scope.uploadPic = function (file) {
-      Upload.base64DataUrl(file).then(function (response) {
-        $scope.picFile = null;
-        $scope.exercise.graphic = response;
-      });
+    $scope.trainingDate=function(){
+      return moment($scope.training.trainingDate).format('X');
     };
 
     // SAVE
-    $scope.saveExercise = function () {
-      if ($stateParams.exerciseId !== undefined) {
-        $scope.exercises.$save($scope.exercise).then(function () {
+    $scope.saveTraining = function () {
+      //$scope.training.trainingDate=$scope.trainingDate();
+      if ($stateParams.trainingId !== undefined) {
+        $scope.trainings.$save($scope.training).then(function () {
           console.log('update!');
         });
       }
       else {
-        $scope.exercises.$add($scope.exercise).then(function () {
+        $scope.trainings.$add($scope.training).then(function () {
           console.log('saved');
         });
       }

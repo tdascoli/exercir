@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
 
+    <link rel="stylesheet" href="css/fancybox/jquery.fancybox.css">
     <link rel="stylesheet" href="css/unigrid-core.css">
     <link rel="stylesheet" href="css/unigrid-forms.css">
     <link rel="stylesheet" href="css/unigrid-grid.css">
@@ -88,6 +89,7 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/detect-mobile-browser/detectmobilebrowser.js"></script>
     <script src="bower_components/moment/min/moment-with-locales.min.js"></script>
+    <script src="bower_components/angular-moment/angular-moment.js"></script>
     <script src="bower_components/ng-lodash/build/ng-lodash.js"></script>
     <script src="bower_components/ng-tags-input/ng-tags-input.js"></script>
     <script src="bower_components/showdown/dist/showdown.js"></script>
@@ -109,11 +111,23 @@
     <script src="scripts/exercises/exercises.controller.js"></script>
     <script src="scripts/exercises/exercises.service.js"></script>
 
+    <script src="scripts/trainings/trainings.controller.js"></script>
+    <script src="scripts/trainings/trainings.editor.controller.js"></script>
+    <script src="scripts/trainings/trainings.service.js"></script>
+
     <script src="scripts/angularfire/config.js"></script>
     <script src="scripts/angularfire/firebase.ref.js"></script>
     <!-- endbuild -->
 
     <script src="https://use.fontawesome.com/e872280775.js"></script>
+
+    <script src="scripts/3rd/jquery-1.10.2.min.js"></script>
+    <script src="scripts/3rd/jquery.fancybox.pack.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $(".fancybox").fancybox();
+      });
+    </script>
 
   </body>
 </html>

@@ -1,13 +1,13 @@
-<h1>exercises</h1>
-<div class="messages">
-  <span ng-show="picFile.result">Upload Successful</span>
-  <span class="err" ng-show="errorMsg">Upload: {{errorMsg}}</span>
-  <i ng-show="myForm.file.$error.maxSize">Upload: File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+<div class="unigrid--row">
+  <div class="brick brick--12">
+    <h1>exercises</h1>
+  </div>
+  <div class="brick brick--12 align--right">
+    <button ng-click="showHtml()"><i class="fa fa-eye" aria-hidden="true"></i> preview</button>
+    <button ui-sref="exercises">back</button>
+  </div>
 </div>
 
-<div>
-  toolbar: <button ng-click="showHtml()"><i class="fa fa-eye" aria-hidden="true"></i></button>
-</div>
 <form>
 <div class="unigrid--row">
   <div class="brick brick--12">
@@ -19,7 +19,7 @@
   <div class="brick brick--12">
     <div class="form-required form-group">
       <label>Trainingsinhalt</label>
-      <tags-input ng-model="exercise.content">
+      <tags-input ng-model="exercise.content" replace-spaces-with-dashes="false">
         <auto-complete source="loadTags($query)"></auto-complete>
       </tags-input>
     </div>
@@ -87,12 +87,6 @@
   </div>
   <div class="brick brick--3">
     <button>Abbrechen</button>
-  </div>
-  <div class="brick brick--18">
-    <div class="checkbox">
-      <input type="checkbox" id="exercise.test" />
-      <label for="exercise.test">Test</label>
-    </div>
   </div>
 </div>
 </form>

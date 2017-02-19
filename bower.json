@@ -2,30 +2,31 @@
   "name": "exercir",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "^1.4.0",
+    "angular": "~1.4.6",
     "angular-bootstrap": "latest",
     "angular-ui-router": "1.0.0-beta.3",
     "angular-ui-router-menus": "latest",
     "firebase": "latest",
     "angularfire": "latest",
     "bootstrap": "^3.2.0",
-    "angular-animate": "^1.4.0",
-    "angular-aria": "^1.4.0",
-    "angular-cookies": "^1.4.0",
-    "angular-messages": "^1.4.0",
-    "angular-resource": "^1.4.0",
-    "angular-route": "^1.4.0",
-    "angular-sanitize": "^1.4.0",
-    "angular-touch": "^1.4.0",
+    "angular-animate": "~1.4.6",
+    "angular-aria": "~1.4.6",
+    "angular-cookies": "~1.4.6",
+    "angular-messages": "~1.4.6",
+    "angular-resource": "~1.4.6",
+    "angular-route": "~1.4.6",
+    "angular-sanitize": "~1.4.6",
+    "angular-touch": "~1.4.6",
     "detect-mobile-browser": "latest",
+    "angular-moment": "latest",
     "moment": "latest",
     "ng-lodash": "latest",
-    "ng-tags-input":"latest",
-    "showdown":"latest",
-    "ng-file-upload":"latest"
+    "ng-tags-input": "latest",
+    "showdown": "latest",
+    "ng-file-upload": "latest"
   },
   "devDependencies": {
-    "angular-mocks": "^1.4.0"
+    "angular-mocks": "~1.4.6"
   },
   "appPath": "app",
   "moduleName": "exercirApp",
@@ -47,7 +48,8 @@
     }
   },
   "resolutions": {
-    "angular": "^1.4.0",
-    "angular-ui-router": "1.0.0-beta.3"
+    "angular": "~1.4.6",
+    "angular-ui-router": "1.0.0-beta.3",
+    "jquery": ">= 1.2.1"
   }
 }
