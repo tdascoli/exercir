@@ -1,6 +1,6 @@
 <div class="unigrid--row">
   <div class="brick brick--12">
-    <h1>trainings</h1>
+    <h1>wizard</h1>
   </div>
   <div class="brick brick--12 align--right">
     <button ng-click="showHtml()"><i class="fa fa-eye" aria-hidden="true"></i> preview</button>
@@ -9,6 +9,8 @@
 </div>
 
 <form class="has-toolbar">
+
+  <!-- ALLGEMEINES -->
   <div class="unigrid--row">
     <div class="brick brick--4">
       <div class="form-required form-group">
@@ -46,6 +48,9 @@
       </div>
     </div>
   </div>
+
+  <!-- BEMERKUNGEN -->
+  <!--
   <div class="unigrid--row">
     <div class="brick brick--24">
       <div class="form-group">
@@ -56,7 +61,9 @@
       </div>
     </div>
   </div>
+  -->
 
+  <!-- TRAININGSINHALT -->
   <div class="unigrid--row training__exercise-search">
     <div class="brick brick--18 unigrid--col">
 
@@ -111,12 +118,14 @@
   </div>
 
   <hr />
+
+  <!-- TRAINING ORGANISIEREN -->
   <!-- overview: auto/scroll ?! -->
   <div class="training">
 
     <div class="unigrid--row unigrid--border training__header">
       <div class="brick brick--2">
-        <strong>Lektionsteil</strong>
+        <strong>Lektionsteile</strong>
       </div>
 
       <div class="brick brick--7">
@@ -185,7 +194,7 @@
 
   </div>
 
-
+  <!-- FOOTER LIKE TOOLBAR -->
   <div class="unigrid--row training__toolbar">
     <div class="brick brick--3">
       <button type="submit" ng-click="saveTraining()">Speichern</button>

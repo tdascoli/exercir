@@ -5,8 +5,20 @@
     <a ui-sref="trainings/training({trainingId: training.$id})">{{ training.team }} - {{ training.trainingDate }} (<span>{{training.timestamp | amDateFormat:'DD.MM.YYYY HH:mm:ss'}}</span>)</a>
   </div>
 
+  <hr class="narrow" />
+
+  <div class="deck" ng-repeat="collection in collections">
+    <a ui-sref="collections/collection({collectionId: collection.$id})">{{ collection.titel }} (<span>{{collection.timestamp | amDateFormat:'DD.MM.YYYY HH:mm:ss'}}</span>)</a>
+  </div>
+  <hr class="narrow" />
+
   <div class="deck create">
     <a ui-sref="trainings/create">+ create training</a><br />
-    <a ui-sref="trainings/collection">+ create collection</a>
+    <a ui-sref="collections/create">+ create collection</a>
   </div>
 </div>
+
+
+<!--
+<ui-view></ui-view>
+-->

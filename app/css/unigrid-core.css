@@ -54,7 +54,7 @@ body {
 
 .navbar {
   z-index: 1035;
-  height: 90px; }
+  height: 86px; }
 
 .navbar > .container {
   display: flex; }
@@ -69,7 +69,7 @@ body {
   top: 0; }
 
 .navbar-fixed + .container {
-  margin-top: 90px; }
+  margin-top: 86px; }
 
 .navbar-header {
   width: 38.1966%;
@@ -83,7 +83,7 @@ body {
   margin: auto 0; }
 
 a.navbar-brand {
-  font-size: 56px;
+  font-size: 54px;
   font-weight: 700;
   color: #fff;
   text-decoration: none;
@@ -99,7 +99,7 @@ a.navbar-brand {
     background: darkgrey; }
 
 .nav > li {
-  margin: 5px;
+  margin: 3px;
   display: inline-block; }
 
 .nav > li:first-child {
@@ -109,7 +109,7 @@ a.navbar-brand {
   margin-right: 0; }
 
 .footer-fixed {
-  margin-bottom: 45px !important; }
+  margin-bottom: 43px !important; }
 
 .footer-fixed + .footer {
   width: 100%;
@@ -127,7 +127,7 @@ a.navbar-brand {
     margin-top: 15.27864px; }
 
   a.navbar-brand {
-    font-size: 35px; }
+    font-size: 34px; }
 
   .navbar-nav a,
   .navbar-nav a:visited {
@@ -138,7 +138,7 @@ a.navbar-brand {
   .nav > li,
   .nav > li:first-child,
   .nav > li:last-child {
-    margin: 5px;
+    margin: 3px;
     display: block; }
 
   .navbar .c-hamburger {

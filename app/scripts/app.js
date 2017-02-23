@@ -138,6 +138,11 @@ var app = angular.module('exercirApp', [
               return Trainings.getUserTrainings(auth.uid);
             });
           },
+          collections: function (Collections,Auth){
+            return Auth.$requireSignIn().then(function(auth){
+              return Collections.getUserCollections(auth.uid);
+            });
+          },
           profile: function ($rootScope, $state, Auth, Users){
             return Auth.$requireSignIn().then(function(auth){
               return Users.getProfile(auth.uid).$loaded().then(function (profile){
@@ -151,7 +156,7 @@ var app = angular.module('exercirApp', [
       })
       .state('trainings/create', {
         url: '/trainings/create',
-        templateUrl: 'views/trainings/trainings.html',
+        templateUrl: 'views/trainings/wizard.html',
         controller: 'TrainingsEditorCtrl',
         resolve: {
           trainings: function (Trainings,Auth){
@@ -201,6 +206,60 @@ var app = angular.module('exercirApp', [
           }
         }
       })
+
+      .state('collections/create', {
+        url: '/collections/create',
+        templateUrl: 'views/trainings/collections.html',
+        controller: 'CollectionsEditorCtrl',
+        resolve: {
+          collections: function (Collections,Auth){
+            return Auth.$requireSignIn().then(function(auth){
+              return Collections.getUserCollections(auth.uid);
+            });
+          },
+          exercises: function (Exercises,Auth){
+            return Auth.$requireSignIn().then(function(auth){
+              return Exercises.getUserExercises(auth.uid);
+            });
+          },
+          profile: function ($rootScope, $state, Auth, Users){
+            return Auth.$requireSignIn().then(function(auth){
+              return Users.getProfile(auth.uid).$loaded().then(function (profile){
+                $rootScope.profile = profile;
+              });
+            }, function(error){
+              $state.go('login');
+            });
+          }
+        }
+      })
+      .state('collections/collection', {
+        url: '/collections/{collectionId}',
+        templateUrl: 'views/trainings/collections.html',
+        controller: 'CollectionsEditorCtrl',
+        resolve: {
+          collections: function (Collections,Auth){
+            return Auth.$requireSignIn().then(function(auth){
+              return Collections.getUserCollections(auth.uid);
+            });
+          },
+          exercises: function (Exercises,Auth){
+            return Auth.$requireSignIn().then(function(auth){
+              return Exercises.getUserExercises(auth.uid);
+            });
+          },
+          profile: function ($rootScope, $state, Auth, Users){
+            return Auth.$requireSignIn().then(function(auth){
+              return Users.getProfile(auth.uid).$loaded().then(function (profile){
+                $rootScope.profile = profile;
+              });
+            }, function(error){
+              $state.go('login');
+            });
+          }
+        }
+      })
+
       .state('reviews', {
         url: '/reviews',
         controller: 'MainCtrl',

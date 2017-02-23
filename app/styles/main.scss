@@ -39,6 +39,9 @@ body {
   padding: 6px 0;
   line-height: 23px;
 }
+.fake-label-margin {
+  margin-top: 35px;
+}
 .fake-input {
   width: calc(100% - 12px);
   display: block;
@@ -58,6 +61,9 @@ body {
 }
 .footer {
   padding-top: 5px;
+}
+.form-control {
+  font-family: 'Montserrat';
 }
 
 /* tags */
@@ -136,16 +142,53 @@ tags-input .tags .input {
 }
 
 /* trainings */
-/*.training__exercise-image,
-.brick > img.training__exercise-image {
-  width: auto;
-}*/
+.training__action {
+  display: none;
+  position: absolute;
+  left: -55px;
+  width: 45px;
+  padding: 5px;
+  background: #eeeeee;
+
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.training__exercise {
+  position: relative;
+}
+.training__exercise:hover {
+  background: #eeeeee;
+  transition: background-color 0.5s ease;
+}
+.training__exercise:hover .training__action {
+  display: block;
+  transition: all 0.5s ease;
+}
 .training__exercise p {
   margin: 0;
 }
-
+.training__exercise-image,
+.collection__exercise-image {
+  width: 100%;
+  max-height: 100% !important;
+  height: auto !important;
+}
 .fancybox > .training__exercise-image {
   height: 100%;
+}
+.collection__exercise-image {
+  border: 2px solid black;
+}
+.training__toolbar {
+  position: fixed;
+  bottom: 45px;
+  background: #eeeeee;
+}
+.training__toolbar button {
+  margin: 0 5px;
+}
+.has-toolbar {
+  margin-bottom: 55px;
 }
 
 /* divers */
@@ -162,6 +205,9 @@ tags-input .tags .input {
   border: 1px solid #acacac;
   border-radius: 0;
   background: silver;
+}
+hr.narrow {
+  margin: 6px 0;
 }
 
 /* Main marketing message and sign up button */

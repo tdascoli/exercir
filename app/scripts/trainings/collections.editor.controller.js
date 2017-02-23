@@ -2,7 +2,7 @@
   'use strict';
 
 angular.module('exercirApp')
-  .controller('TrainingsEditorCtrl', function ($scope, $sce, $stateParams, $q, $filter, $firebaseArray, Ref, moment, lodash, Upload, trainings, exercises) {
+  .controller('CollectionsEditorCtrl', function ($scope, $sce, $stateParams, $q, $filter, Ref, moment, lodash, Upload, collections, exercises) {
 
 
     $scope.loadTags = function(query) {
@@ -25,7 +25,7 @@ angular.module('exercirApp')
 
     $scope.exercises = exercises;
     // 3-way binding?
-    $scope.trainings = trainings;
+    $scope.collections = collections;
 
     $scope.exercise={};
     $scope.editTrainingIndex=false;
@@ -33,8 +33,8 @@ angular.module('exercirApp')
     $scope.training = {};
     $scope.training.timestamp = firebase.database.ServerValue.TIMESTAMP;
 
-    if ($stateParams.trainingId !== undefined) {
-      $scope.training = $scope.trainings.$getRecord($stateParams.trainingId);
+    if ($stateParams.collectionId !== undefined) {
+      $scope.training = $scope.collections.$getRecord($stateParams.collectionId);
     }
 
 
@@ -88,13 +88,9 @@ angular.module('exercirApp')
         $scope.training.exercises=[];
       }
 
+      $scope.exercise.content=$scope.search;
       $scope.training.exercises.push($scope.exercise);
       $scope.exercise={};
-    };
-
-    $scope.addExerciseToCollection=function(){
-        $scope.exercise.content=$scope.search;
-        $scope.addExercise();
     };
 
     $scope.showExercise=function(exerciseId){
@@ -137,16 +133,16 @@ angular.module('exercirApp')
     };
 
     // SAVE
-    $scope.saveTraining = function () {
-      if ($stateParams.trainingId !== undefined) {
-        $scope.trainings.$save($scope.training).then(function () {
+    $scope.saveCollection = function () {
+      if ($stateParams.collectionId !== undefined) {
+        $scope.collections.$save($scope.training).then(function () {
           console.log('update!');
         }, function(err){
           console.log(err);
         });
       }
       else {
-        $scope.trainings.$add($scope.training).then(function () {
+        $scope.collections.$add($scope.training).then(function () {
           console.log('saved!');
         });
       }

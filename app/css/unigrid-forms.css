@@ -20,7 +20,7 @@ The surrounding division has to clear the floating though. */
 .form-group,
 .pifa-form div {
   display: block;
-  margin-bottom: 5px; }
+  margin-bottom: 3px; }
 
 .form-group label,
 .pifa-form label {
@@ -156,7 +156,7 @@ div.pifa-error {
   display: block;
   position: relative;
   padding-left: 33px;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
   cursor: pointer; }
 
 .checkbox > label::before {

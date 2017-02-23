@@ -1,0 +1,124 @@
+<div class="unigrid--row">
+  <div class="brick brick--12">
+    <h1>collections</h1>
+  </div>
+  <div class="brick brick--12 align--right">
+    <button ng-click="showHtml()"><i class="fa fa-eye" aria-hidden="true"></i> preview</button>
+    <button ui-sref="trainings">back</button>
+  </div>
+</div>
+
+<form class="has-toolbar">
+  <div class="unigrid--row training__exercise-search">
+    <div class="brick brick--11">
+      <div class="form-required form-group">
+        <label for="training.titel">Titel</label>
+        <input ng-model="training.titel" type="text" name="training.titel" id="training.titel" class="form-control"
+               required/>
+      </div>
+    </div>
+
+    <div class="brick brick--10">
+      <div class="form-required form-group">
+        <label>Trainingsinhalt</label>
+        <tags-input ng-model="search" replace-spaces-with-dashes="false">
+          <auto-complete source="loadTags($query)"></auto-complete>
+        </tags-input>
+      </div>
+    </div>
+
+    <div class="brick brick--3">
+      <button type="button" class="btn-primary fake-label-margin" style="width: 100%;"
+              ng-click="addExercise()">Hinzufügen
+      </button>
+    </div>
+  </div>
+
+  <div class="unigrid--row" ng-repeat="item in searchResult">
+    <div class="brick brick--4">
+      <div class="radio">
+        <input id="{{item.$id}}" type="radio" value="{{item.$id}}" name="exerciseId" ng-model="exercise.exerciseId"/>
+        <label for="{{item.$id}}">
+          {{ item.name }}
+        </label>
+      </div>
+    </div>
+    <div class="brick brick--4">
+      <a class="fancybox" href="{{item.graphic}}">
+        <img class="training__exercise-image" data-ng-src="{{item.graphic}}" data-err-src="images/torschuss.png"/>
+      </a>
+    </div>
+    <div class="brick brick--16">
+      <span class="tag-item" ng-repeat="tags in item.content">{{ tags.text }}</span>
+    </div>
+  </div>
+
+  <hr class="narrow"/>
+  <!-- overview: auto/scroll ?! -->
+  <div class="collection">
+    <div class="exercise" ng-repeat="trainingExercise in training.exercises track by $index">
+      <div class="unigrid--row">
+        <div class="brick brick--24">
+          <span class="fake-label">Trainingsinhalt</span>
+          <div class="fake-input">
+            <span class="tag-item" ng-repeat="tags in trainingExercise.content">{{ tags.text }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="unigrid--row">
+        <div class="brick brick--12">
+          <span class="fake-label">Grafik</span>
+          <img class="collection__exercise-image" data-ng-src="{{showExercise(trainingExercise.exerciseId).graphic}}"/>
+        </div>
+        <div class="brick brick--12">
+          <span class="fake-label">Beschreibung</span>
+          <span class="fake-input"
+                ng-bind-html="convertToHtml(showExercise(trainingExercise.exerciseId).description)"></span>
+        </div>
+      </div>
+
+      <div class="unigrid--row">
+        <div class="brick brick--24">
+          <span class="fake-label">Aufbau</span>
+          <span class="fake-input" ng-bind-html="convertToHtml(showExercise(trainingExercise.exerciseId).aufbau)"></span>
+        </div>
+      </div>
+
+      <div class="unigrid--row">
+        <div class="brick brick--24">
+          <span class="fake-label">Coaching</span>
+          <span class="fake-input" ng-bind-html="convertToHtml(showExercise(trainingExercise.exerciseId).coaching)"></span>
+        </div>
+      </div>
+
+      <div class="unigrid--row">
+        <div class="brick brick--24">
+          <span class="fake-label">Variationen</span>
+          <span class="fake-input" ng-bind-html="convertToHtml(showExercise(trainingExercise.exerciseId).variationen)"></span>
+        </div>
+      </div>
+
+      <div class="unigrid--row">
+        <div class="brick brick--24">
+          <div class="form-group">
+            <label for="trainingExercise.bemerkungen">Bemerkungen</label>
+            <textarea rows="3" class="form-control" id="trainingExercise.bemerkungen"
+                      ng-model="trainingExercise.bemerkungen"
+                      ng-if="!showHtmlText"></textarea>
+            <div ng-bind-html="convertToHtml(trainingExercise.bemerkungen)" ng-show="showHtmlText"
+                 class="fake-input"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="unigrid--row training__toolbar">
+    <div class="brick brick--3">
+      <button type="submit" ng-click="saveCollection()">Speichern</button>
+    </div>
+  </div>
+</form>
