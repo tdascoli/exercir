@@ -1,6 +1,6 @@
 'use strict';
 angular.module('exercirApp')
-  .factory('Collections', function($firebaseArray, Ref){
+  .factory('Collections', function($firebaseArray, $firebaseObject, Ref){
     var ref = Ref.child('collections');
     var collections = $firebaseArray(ref);
 

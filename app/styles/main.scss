@@ -190,6 +190,10 @@ tags-input .tags .input {
 .has-toolbar {
   margin-bottom: 55px;
 }
+.training__header .brick {
+  height: auto;
+  min-height: auto;
+}
 
 /* divers */
 .align--right {
@@ -208,6 +212,24 @@ tags-input .tags .input {
 }
 hr.narrow {
   margin: 6px 0;
+}
+a.wizard {
+  width:25px;
+  height:25px;
+  border-radius:12.5px;
+  font-size:12px;
+  color:#fff;
+  line-height:25px;
+  text-align:center;
+  background:#000;
+  display: inline-block;
+  text-decoration: none;
+}
+a.wizard.active {
+  background: silver;
+}
+a.wizard:hover {
+  background: #e5e5e5;
 }
 
 /* Main marketing message and sign up button */

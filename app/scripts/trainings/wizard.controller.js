@@ -2,42 +2,10 @@
   'use strict';
 
 angular.module('exercirApp')
-  .controller('TrainingsEditorCtrl', function ($scope, $sce, $stateParams, $q, $firebaseArray, Ref, lodash, trainings, exercises) {
-
-    console.log('TrainingsEditorCtrl');
-
-    $scope.loadTags = function(query) {
-      return $q(function(resolve) {
-
-        Ref.child('data/training-content')
-          .orderByChild('text')
-          .startAt(query)
-          .endAt(query+'\uf8ff')
-          .once('value', function (snap) {
-            var records = [];
-            snap.forEach(function (ss) {
-              records.push(ss.val());
-            });
-            resolve({data: records});
-          });
-
-      });
-    };
-
-    $scope.exercises = exercises;
-    // 3-way binding?
-    $scope.trainings = trainings;
+  .controller('WizardCtrl', function ($scope, $sce, lodash) {
 
     $scope.exercise={};
     $scope.editTrainingIndex=false;
-
-    $scope.training = {};
-    $scope.training.timestamp = firebase.database.ServerValue.TIMESTAMP;
-
-    if ($stateParams.trainingId !== undefined) {
-      $scope.training = $scope.trainings.$getRecord($stateParams.trainingId);
-    }
-
 
     // SEARCH
     $scope.searchResult=[];
@@ -136,22 +104,6 @@ angular.module('exercirApp')
 
     $scope.convertToHtml = function (markdown) {
       return $sce.trustAsHtml(converter.makeHtml(markdown));
-    };
-
-    // SAVE
-    $scope.saveTraining = function () {
-      if ($stateParams.trainingId !== undefined) {
-        $scope.trainings.$save($scope.training).then(function () {
-          console.log('update!');
-        }, function(err){
-          console.log(err);
-        });
-      }
-      else {
-        $scope.trainings.$add($scope.training).then(function () {
-          console.log('saved!');
-        });
-      }
     };
   });
 

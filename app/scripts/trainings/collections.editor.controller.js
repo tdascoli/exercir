@@ -2,8 +2,7 @@
   'use strict';
 
 angular.module('exercirApp')
-  .controller('CollectionsEditorCtrl', function ($scope, $sce, $stateParams, $q, $filter, Ref, moment, lodash, Upload, collections, exercises) {
-
+  .controller('CollectionsEditorCtrl', function ($scope, $sce, $stateParams, $q, Ref, lodash, collections, exercises) {
 
     $scope.loadTags = function(query) {
       return $q(function(resolve) {
@@ -11,7 +10,7 @@ angular.module('exercirApp')
         Ref.child('data/training-content')
           .orderByChild('text')
           .startAt(query)
-          .endAt(`${query}\uf8ff`)
+          .endAt(query+'\uf8ff')
           .once('value', function (snap) {
             var records = [];
             snap.forEach(function (ss) {

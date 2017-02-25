@@ -1,0 +1,48 @@
+<pre>{{ search | json }}</pre>
+
+<!-- TRAININGSINHALT -->
+<div class="unigrid--row training__exercise-search">
+  <div class="brick brick--21">
+    <div class="form-required form-group">
+      <label>Trainingsinhalt</label>
+      <tags-input ng-model="search" replace-spaces-with-dashes="false">
+        <auto-complete source="loadTags($query)"></auto-complete>
+      </tags-input>
+    </div>
+  </div>
+
+  <div class="brick brick--3">
+    <button type="button" style="width: 100%;"
+            ng-click="searchTerm()">Suchen
+    </button>
+
+    <button type="button" class="btn-primary" style="width: 100%;"
+            ng-click="addExercise()">Hinzufügen
+    </button>
+  </div>
+</div>
+
+<div class="unigrid--row" ng-repeat="item in searchResult">
+  <div class="brick brick--4">
+    <div class="radio">
+      <input id="{{item.$id}}" type="radio" value="{{item.$id}}" name="exerciseId" ng-model="exercise.exerciseId"/>
+      <label for="{{item.$id}}">
+        {{ item.name }}
+      </label>
+    </div>
+  </div>
+  <div class="brick brick--4">
+    <a class="fancybox" href="{{item.graphic}}">
+      <img class="training__exercise-image" data-ng-src="{{item.graphic}}" data-err-src="images/torschuss.png"/>
+    </a>
+  </div>
+  <div class="brick brick--16">
+    <span class="tag-item" ng-repeat="tags in item.content">{{ tags.text }}</span>
+  </div>
+</div>
+
+<hr class="narrow"/>
+
+<div>
+  SUMMARY SMALL
+</div>

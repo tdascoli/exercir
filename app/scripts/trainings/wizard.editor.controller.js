@@ -2,8 +2,7 @@
   'use strict';
 
 angular.module('exercirApp')
-  .controller('ExercisesCtrl', function ($scope, $sce, $stateParams, $q, Ref, Upload, exercises) {
-
+  .controller('WizardEditorCtrl', function ($scope, $sce, $stateParams, $q, $firebaseArray, Ref, lodash, trainings, exercises) {
 
     $scope.loadTags = function(query) {
       return $q(function(resolve) {
@@ -24,12 +23,14 @@ angular.module('exercirApp')
     };
 
     $scope.exercises = exercises;
+    // 3-way binding?
+    $scope.trainings = trainings;
 
-    $scope.exercise = {};
-    $scope.exercise.timestamp = firebase.database.ServerValue.TIMESTAMP;
+    $scope.training = {};
+    $scope.training.timestamp = firebase.database.ServerValue.TIMESTAMP;
 
-    if ($stateParams.exerciseId !== undefined) {
-      $scope.exercise = $scope.exercises.$getRecord($stateParams.exerciseId);
+    if ($stateParams.trainingId !== undefined) {
+      $scope.training = $scope.trainings.$getRecord($stateParams.trainingId);
     }
 
     // MARKDOWN
@@ -43,24 +44,18 @@ angular.module('exercirApp')
       return $sce.trustAsHtml(converter.makeHtml(markdown));
     };
 
-    // UPLOAD
-    $scope.uploadPic = function (file) {
-      Upload.base64DataUrl(file).then(function (response) {
-        $scope.picFile = null;
-        $scope.exercise.graphic = response;
-      });
-    };
-
     // SAVE
-    $scope.saveExercise = function () {
-      if ($stateParams.exerciseId !== undefined) {
-        $scope.exercises.$save($scope.exercise).then(function () {
+    $scope.saveTraining = function () {
+      if ($stateParams.trainingId !== undefined) {
+        $scope.trainings.$save($scope.training).then(function () {
           console.log('update!');
+        }, function(err){
+          console.log(err);
         });
       }
       else {
-        $scope.exercises.$add($scope.exercise).then(function () {
-          console.log('saved');
+        $scope.trainings.$add($scope.training).then(function () {
+          console.log('saved!');
         });
       }
     };

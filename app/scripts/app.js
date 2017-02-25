@@ -60,6 +60,7 @@ var app = angular.module('exercirApp', [
                 $rootScope.profile = profile;
               });
             }, function(error){
+              console.log(error);
               $state.go('login');
             });
           }
@@ -81,6 +82,7 @@ var app = angular.module('exercirApp', [
                 $rootScope.profile = profile;
               });
             }, function(error){
+              console.log(error);
               $state.go('login');
             });
           }
@@ -102,6 +104,7 @@ var app = angular.module('exercirApp', [
                 $rootScope.profile = profile;
               });
             }, function(error){
+              console.log(error);
               $state.go('login');
             });
           }
@@ -123,6 +126,7 @@ var app = angular.module('exercirApp', [
                 $rootScope.profile = profile;
               });
             }, function(error){
+              console.log(error);
               $state.go('login');
             });
           }
@@ -149,15 +153,17 @@ var app = angular.module('exercirApp', [
                 $rootScope.profile = profile;
               });
             }, function(error){
+              console.log(error);
               $state.go('login');
             });
           }
         }
       })
+
       .state('trainings/create', {
         url: '/trainings/create',
         templateUrl: 'views/trainings/wizard.html',
-        controller: 'TrainingsEditorCtrl',
+        controller: 'WizardEditorCtrl',
         resolve: {
           trainings: function (Trainings,Auth){
             return Auth.$requireSignIn().then(function(auth){
@@ -175,11 +181,28 @@ var app = angular.module('exercirApp', [
                 $rootScope.profile = profile;
               });
             }, function(error){
+              console.log(error);
               $state.go('login');
             });
           }
         }
       })
+      .state('trainings/create.step1', {
+        url: '/step1',
+        templateUrl: 'views/trainings/wizard/step1.html',
+        controller: 'WizardCtrl'
+      })
+      .state('trainings/create.step2', {
+        url: '/step2',
+        templateUrl: 'views/trainings/wizard/step2.html',
+        controller: 'WizardCtrl'
+      })
+      .state('trainings/create.step3', {
+        url: '/step3',
+        templateUrl: 'views/trainings/wizard/step3.html',
+        controller: 'WizardCtrl'
+      })
+
       .state('trainings/training', {
         url: '/trainings/{trainingId}',
         templateUrl: 'views/trainings/trainings.html',
@@ -201,6 +224,7 @@ var app = angular.module('exercirApp', [
                 $rootScope.profile = profile;
               });
             }, function(error){
+              console.log(error);
               $state.go('login');
             });
           }
@@ -228,6 +252,7 @@ var app = angular.module('exercirApp', [
                 $rootScope.profile = profile;
               });
             }, function(error){
+              console.log(error);
               $state.go('login');
             });
           }
@@ -254,6 +279,7 @@ var app = angular.module('exercirApp', [
                 $rootScope.profile = profile;
               });
             }, function(error){
+              console.log(error);
               $state.go('login');
             });
           }
@@ -274,6 +300,7 @@ var app = angular.module('exercirApp', [
             return Auth.$requireSignIn().then(function(){
               $state.go('exercises');
             }, function(error){
+              console.log(error);
               return;
             });
           }
@@ -290,6 +317,7 @@ var app = angular.module('exercirApp', [
                 $rootScope.profile = profile;
               });
             }, function(error){
+              console.log(error);
               $state.go('login');
             });
           }
