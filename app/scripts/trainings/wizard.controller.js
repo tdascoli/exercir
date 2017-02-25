@@ -94,16 +94,11 @@ angular.module('exercirApp')
       return filterBy;
     };
 
-    // MARKDOWN
-    var converter = new showdown.Converter();
-    $scope.showHtmlText = false;
-    $scope.showHtml = function () {
-      $scope.showHtmlText = !$scope.showHtmlText;
+    $scope.sortableConf={
+      handle: '.fa-arrows',
+      animation: 150
     };
 
-    $scope.convertToHtml = function (markdown) {
-      return $sce.trustAsHtml(converter.makeHtml(markdown));
-    };
   });
 
   angular.module('exercirApp')

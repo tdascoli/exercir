@@ -224,7 +224,8 @@ hr.narrow {
 hr.invisible {
   border-color: transparent;
 }
-button.narrow {
+button.narrow,
+.btn-default.narrow {
   padding: 3px 6px;
 }
 a.wizard {
@@ -244,6 +245,11 @@ a.wizard.active {
 }
 a.wizard:hover {
   background: #e5e5e5;
+}
+
+.ghost {
+  opacity: .5;
+  background: #C8EBFB;
 }
 
 /* Main marketing message and sign up button */

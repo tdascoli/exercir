@@ -26,6 +26,25 @@
 
 <hr class="narrow"/>
 
-<div>
-  SUMMARY SMALL
+<script>
+  var el = document.getElementById('items');
+  var sortable = Sortable.create(el,{
+    handle: ".fa-arrows",
+    animation: 150,
+    ghostClass: 'ghost'
+  });
+</script>
+<div id="items">
+  <div class="unigrid--row" ng-repeat="trainingExercise in training.exercises track by $index">
+    <div class="brick brick--4">
+      <span class="btn-default narrow"><i class="fa fa-arrows" aria-hidden="true"></i></span>
+      <button class="narrow" ng-click="removeExercise($index)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+    </div>
+    <div class="brick brick--6">
+      <strong><a class="fancybox" href="{{showExercise(trainingExercise.exerciseId).graphic}}">{{showExercise(trainingExercise.exerciseId).name}}</a></strong>
+    </div>
+    <div class="brick brick--14">
+      <span class="tag-item" ng-repeat="tags in showExercise(trainingExercise.exerciseId).content">{{ tags.text }}</span>
+    </div>
+  </div>
 </div>

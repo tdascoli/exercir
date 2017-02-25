@@ -4,8 +4,6 @@
 angular.module('exercirApp')
   .controller('TrainingsEditorCtrl', function ($scope, $sce, $stateParams, $q, $firebaseArray, Ref, lodash, trainings, exercises) {
 
-    console.log('TrainingsEditorCtrl');
-
     $scope.loadTags = function(query) {
       return $q(function(resolve) {
 
