@@ -4,14 +4,13 @@
 angular.module('exercirApp')
   .controller('WizardCtrl', function ($scope, $sce, lodash) {
 
-    $scope.exercise={};
     $scope.editTrainingIndex=false;
 
     // SEARCH
     $scope.searchResult=[];
 
-    $scope.$watch('search', function() {
-      if ($scope.search!==undefined) {
+    $scope.$watch('training.content', function() {
+      if ($scope.training.content!==undefined) {
         $scope.searchTerm();
       }
     }, true);
@@ -38,7 +37,7 @@ angular.module('exercirApp')
 
     function checkExerciseString(esStr){
       var isInStr=false;
-      angular.forEach($scope.search, function (value) {
+      angular.forEach($scope.training.content, function (value) {
         if (lodash.toLower(esStr).indexOf(lodash.toLower(value.text))>=0){
           isInStr=true;
         }
@@ -47,24 +46,16 @@ angular.module('exercirApp')
     }
 
     $scope.searchTerm=function () {
-      console.log('search');
       $scope.searchResult = lodash.filter($scope.exercises, function(o) {
         return checkExerciseObject(o);
       });
     };
 
-    $scope.addExercise=function () {
+    $scope.addExercise=function (exerciseId) {
       if ($scope.training.exercises===undefined){
         $scope.training.exercises=[];
       }
-
-      $scope.training.exercises.push($scope.exercise);
-      $scope.exercise={};
-    };
-
-    $scope.addExerciseToCollection=function(){
-        $scope.exercise.content=$scope.search;
-        $scope.addExercise();
+      $scope.training.exercises.push({exerciseId:exerciseId});
     };
 
     $scope.showExercise=function(exerciseId){
@@ -95,6 +86,14 @@ angular.module('exercirApp')
       return ($scope.editTrainingIndex===index);
     };
 
+    $scope.filterBy=function(){
+      var filterBy=[];
+      angular.forEach($scope.training.exercises, function(value){
+        filterBy.push(value.exerciseId);
+      });
+      return filterBy;
+    };
+
     // MARKDOWN
     var converter = new showdown.Converter();
     $scope.showHtmlText = false;
@@ -106,5 +105,27 @@ angular.module('exercirApp')
       return $sce.trustAsHtml(converter.makeHtml(markdown));
     };
   });
+
+  angular.module('exercirApp')
+  .filter('inArray', function($filter){
+    return function(list, arrayFilter, element){
+      if(arrayFilter){
+        return $filter("filter")(list, function(listItem){
+          return arrayFilter.indexOf(listItem[element]) !== -1;
+        });
+      }
+    };
+  });
+
+  angular.module('exercirApp')
+    .filter('notInArray', function($filter){
+      return function(list, arrayFilter, element){
+        if(arrayFilter){
+          return $filter("filter")(list, function(listItem){
+            return arrayFilter.indexOf(listItem[element]) === -1;
+          });
+        }
+      };
+    });
 
 }());

@@ -161,7 +161,7 @@ var app = angular.module('exercirApp', [
       })
 
       .state('trainings/create', {
-        url: '/trainings/create',
+        url: '/trainings/create?{trainingId}',
         templateUrl: 'views/trainings/wizard.html',
         controller: 'WizardEditorCtrl',
         resolve: {

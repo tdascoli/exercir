@@ -2,7 +2,7 @@
 
 <div class="deck-list">
   <div class="deck" ng-repeat="training in trainings">
-    <a ui-sref="trainings/training({trainingId: training.$id})">{{ training.team }} - {{ training.trainingDate }} (<span>{{training.timestamp | amDateFormat:'DD.MM.YYYY HH:mm:ss'}}</span>)</a>
+    <a ui-sref="trainings/training({trainingId: training.$id})">{{ training.team }} - {{ training.trainingDate }} (<span>{{training.timestamp | amDateFormat:'DD.MM.YYYY HH:mm:ss'}}</span>)</a> (<a ui-sref="trainings/create.step1({trainingId: training.$id})">edit</a>)
   </div>
 
   <hr class="narrow" />

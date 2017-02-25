@@ -61,7 +61,7 @@
         <div class="brick brick--24">
           <span class="fake-label">Trainingsinhalt</span>
           <div class="fake-input">
-            <span class="tag-item" ng-repeat="tags in trainingExercise.content">{{ tags.text }}</span>
+            <span ng-repeat="tags in trainingExercise.content">{{ tags.text }}<span ng-if="!$last">, </span></span>
           </div>
         </div>
       </div>

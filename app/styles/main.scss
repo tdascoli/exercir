@@ -164,8 +164,15 @@ tags-input .tags .input {
   display: block;
   transition: all 0.5s ease;
 }
+.training p,
+.exercises p,
 .training__exercise p {
   margin: 0;
+}
+.training .fake-label,
+.exercises .fake-label,
+.training__exercise .fake-label {
+  padding-bottom: 0;
 }
 .training__exercise-image,
 .collection__exercise-image {
@@ -190,7 +197,8 @@ tags-input .tags .input {
 .has-toolbar {
   margin-bottom: 55px;
 }
-.training__header .brick {
+.training__header .brick,
+.exercises__header .brick {
   height: auto;
   min-height: auto;
 }
@@ -212,6 +220,12 @@ tags-input .tags .input {
 }
 hr.narrow {
   margin: 6px 0;
+}
+hr.invisible {
+  border-color: transparent;
+}
+button.narrow {
+  padding: 3px 6px;
 }
 a.wizard {
   width:25px;
