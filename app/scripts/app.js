@@ -22,6 +22,7 @@ var app = angular.module('exercirApp', [
     'ngTagsInput',
     'ngFileUpload',
     'angularMoment',
+    'as.sortable',
     'ui.router',
     'ui.router.menus',
     'ui.bootstrap',
@@ -232,8 +233,8 @@ var app = angular.module('exercirApp', [
       })
 
       .state('collections/create', {
-        url: '/collections/create',
-        templateUrl: 'views/trainings/collections.html',
+        url: '/collections/create?{collectionId}',
+        templateUrl: 'views/collections/wizard.html',
         controller: 'CollectionsEditorCtrl',
         resolve: {
           collections: function (Collections,Auth){
@@ -258,9 +259,20 @@ var app = angular.module('exercirApp', [
           }
         }
       })
+      .state('collections/create.step1', {
+        url: '/step1',
+        templateUrl: 'views/collections/wizard/step1.html',
+        controller: 'CollectionCtrl'
+      })
+      .state('collections/create.step2', {
+        url: '/step2',
+        templateUrl: 'views/collections/wizard/step2.html',
+        controller: 'CollectionCtrl'
+      })
+
       .state('collections/collection', {
         url: '/collections/{collectionId}',
-        templateUrl: 'views/trainings/collections.html',
+        templateUrl: 'views/collections/collections.html',
         controller: 'CollectionsEditorCtrl',
         resolve: {
           collections: function (Collections,Auth){

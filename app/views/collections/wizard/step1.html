@@ -1,11 +1,23 @@
-<!-- TRAININGSINHALT -->
-<div class="form-required form-group">
-  <label>Trainingsinhalt</label>
-  <tags-input ng-model="training.content" replace-spaces-with-dashes="false">
-    <auto-complete source="loadTags($query)"></auto-complete>
-  </tags-input>
+<div class="unigrid--row training__exercise-search">
+  <div class="brick brick--12">
+    <div class="form-required form-group">
+      <label for="training.titel">Titel</label>
+      <input ng-model="training.titel" type="text" name="training.titel" id="training.titel" class="form-control"
+             required/>
+    </div>
+  </div>
+
+  <div class="brick brick--12">
+    <div class="form-required form-group">
+      <label>Trainingsinhalt</label>
+      <tags-input ng-model="search" replace-spaces-with-dashes="false">
+        <auto-complete source="loadTags($query)"></auto-complete>
+      </tags-input>
+    </div>
+  </div>
 </div>
 
+<!-- TRAININGSINHALT -->
 <div class="unigrid--row" ng-repeat="item in searchResult | notInArray:filterBy():'$id'">
   <div class="brick brick--2">
     <button class="narrow" ng-click="addExercise(item.$id)">Hinzufügen</button>
@@ -34,7 +46,10 @@
     <div class="brick brick--6">
       <strong><a class="fancybox" href="{{showExercise(trainingExercise.exerciseId).graphic}}">{{showExercise(trainingExercise.exerciseId).name}}</a></strong>
     </div>
-    <div class="brick brick--16">
+    <div class="brick brick--6">
+      <span ng-repeat="tags in trainingExercise.content">{{ tags.text }}<span ng-if="!$last">, </span></span>
+    </div>
+    <div class="brick brick--10">
       <span class="tag-item" ng-repeat="tags in showExercise(trainingExercise.exerciseId).content">{{ tags.text }}</span>
     </div>
   </div>

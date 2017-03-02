@@ -1,6 +1,6 @@
 <div class="unigrid--row">
   <div class="brick brick--12">
-    <h1>wizard</h1>
+    <h1>collections</h1>
   </div>
   <div class="brick brick--12 align--right">
     <button ng-click="showHtml()"><i class="fa fa-eye" aria-hidden="true"></i> preview</button>
@@ -8,7 +8,7 @@
   </div>
 </div>
 
-<a ui-sref="trainings/create.step1" ui-sref-active="active" class="wizard">1</a> / <a ui-sref="trainings/create.step2" ui-sref-active="active" class="wizard">2</a> / <a ui-sref="trainings/create.step3" ui-sref-active="active" class="wizard">3</a>
+<a ui-sref="collections/create.step1" ui-sref-active="active" class="wizard">1</a> / <a ui-sref="collections/create.step2" ui-sref-active="active" class="wizard">2</a>
 
 <form class="has-toolbar">
 
@@ -17,10 +17,10 @@
   <!-- FOOTER LIKE TOOLBAR -->
   <div class="unigrid--row training__toolbar">
     <div class="brick brick--3">
-      <button type="submit" ng-click="saveTraining()">Speichern</button>
+      <button type="submit" ng-click="saveCollection()">Speichern</button>
     </div>
     <div class="brick brick--21">
-      <button ui-sref="collections/training({trainingId: training.$id})">Vorschau</button>
+      <button ui-sref="collections/collection({collectionId: collection.$id})">Vorschau</button>
       <button>Drucken</button>
       <button>Herunterladen</button>
     </div>

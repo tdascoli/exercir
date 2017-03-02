@@ -17,6 +17,7 @@
     "angular-route": "~1.4.6",
     "angular-sanitize": "~1.4.6",
     "angular-touch": "~1.4.6",
+    "ng-sortable":"latest",
     "sortablejs":"latest",
     "detect-mobile-browser": "latest",
     "angular-moment": "latest",

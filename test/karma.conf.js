@@ -36,6 +36,7 @@ module.exports = function(config) {
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-touch/angular-touch.js',
+      'bower_components/ng-sortable/dist/ng-sortable.js',
       'bower_components/sortablejs/Sortable.js',
       'bower_components/detect-mobile-browser/detectmobilebrowser.js',
       'bower_components/moment/min/moment-with-locales.min.js',

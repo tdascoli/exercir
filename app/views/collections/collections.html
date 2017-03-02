@@ -3,59 +3,12 @@
     <h1>collections</h1>
   </div>
   <div class="brick brick--12 align--right">
-    <button ng-click="showHtml()"><i class="fa fa-eye" aria-hidden="true"></i> preview</button>
     <button ui-sref="trainings">back</button>
   </div>
 </div>
 
-<form class="has-toolbar">
-  <div class="unigrid--row training__exercise-search">
-    <div class="brick brick--11">
-      <div class="form-required form-group">
-        <label for="training.titel">Titel</label>
-        <input ng-model="training.titel" type="text" name="training.titel" id="training.titel" class="form-control"
-               required/>
-      </div>
-    </div>
-
-    <div class="brick brick--10">
-      <div class="form-required form-group">
-        <label>Trainingsinhalt</label>
-        <tags-input ng-model="search" replace-spaces-with-dashes="false">
-          <auto-complete source="loadTags($query)"></auto-complete>
-        </tags-input>
-      </div>
-    </div>
-
-    <div class="brick brick--3">
-      <button type="button" class="btn-primary fake-label-margin" style="width: 100%;"
-              ng-click="addExercise()">Hinzufügen
-      </button>
-    </div>
-  </div>
-
-  <div class="unigrid--row" ng-repeat="item in searchResult">
-    <div class="brick brick--4">
-      <div class="radio">
-        <input id="{{item.$id}}" type="radio" value="{{item.$id}}" name="exerciseId" ng-model="exercise.exerciseId"/>
-        <label for="{{item.$id}}">
-          {{ item.name }}
-        </label>
-      </div>
-    </div>
-    <div class="brick brick--4">
-      <a class="fancybox" href="{{item.graphic}}">
-        <img class="training__exercise-image" data-ng-src="{{item.graphic}}" data-err-src="images/torschuss.png"/>
-      </a>
-    </div>
-    <div class="brick brick--16">
-      <span class="tag-item" ng-repeat="tags in item.content">{{ tags.text }}</span>
-    </div>
-  </div>
-
-  <hr class="narrow"/>
-  <!-- overview: auto/scroll ?! -->
-  <div class="collection">
+  <div class="has-toolbar collection">
+    <h2>{{training.titel}}</h2>
     <div class="exercise" ng-repeat="trainingExercise in training.exercises track by $index">
       <div class="unigrid--row">
         <div class="brick brick--24">
@@ -116,9 +69,12 @@
   </div>
 
 
-  <div class="unigrid--row training__toolbar">
-    <div class="brick brick--3">
-      <button type="submit" ng-click="saveCollection()">Speichern</button>
-    </div>
+<div class="unigrid--row training__toolbar">
+  <div class="brick brick--3">
+    <button type="submit" ui-sref="collections/create.step1({collectionId: collection.$id})">Bearbeiten</button>
   </div>
-</form>
+  <div class="brick brick--21">
+    <button>Drucken</button>
+    <button>Herunterladen</button>
+  </div>
+</div>
