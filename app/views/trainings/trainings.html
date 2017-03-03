@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="brick brick--6 align--right">
-      Logo/Verein
+      <img src="images/logo.png" style="height: 100px; width: auto;" />
     </div>
 
   </div>
@@ -75,7 +75,7 @@
 
   <hr class="invisible" />
 
-  <div class="unigrid--row unigrid--border">
+  <div class="unigrid--row unigrid--border" ng-if="training.bemerkungen">
     <div class="brick brick--24">
       <span class="fake-label">Bemerkungen</span>
       <div ng-bind-html="convertToHtml(training.bemerkungen)"></div>
@@ -87,8 +87,9 @@
       <button type="submit" ui-sref="trainings/create.step1({trainingId: training.$id})">Bearbeiten</button>
     </div>
     <div class="brick brick--21">
-      <button>Drucken</button>
-      <button>Herunterladen</button>
+      <button ng-click="makePDF('open')">Vorschau</button>
+      <button ng-click="makePDF('print')">Drucken</button>
+      <button ng-click="makePDF('download')">Herunterladen</button>
     </div>
   </div>
 

@@ -58,11 +58,6 @@
         $scope.training.exercises.push({exerciseId:exerciseId, content: $scope.search});
       };
 
-      $scope.showExercise=function(exerciseId){
-        var exercise = lodash.filter($scope.exercises, ['$id', exerciseId]);
-        return exercise[0];
-      };
-
       $scope.removeExercise=function(index){
         $scope.training.exercises.splice(index, 1);
         // save?
@@ -95,7 +90,7 @@
       };
 
       $scope.sortableConf={
-        handle: ".fa-arrows",
+        handle: '.fa-arrows',
         animation: 150,
         ghostClass: 'ghost'
       };
@@ -106,7 +101,7 @@
     .filter('inArray', function($filter){
       return function(list, arrayFilter, element){
         if(arrayFilter){
-          return $filter("filter")(list, function(listItem){
+          return $filter('filter')(list, function(listItem){
             return arrayFilter.indexOf(listItem[element]) !== -1;
           });
         }
@@ -117,7 +112,7 @@
     .filter('notInArray', function($filter){
       return function(list, arrayFilter, element){
         if(arrayFilter){
-          return $filter("filter")(list, function(listItem){
+          return $filter('filter')(list, function(listItem){
             return arrayFilter.indexOf(listItem[element]) === -1;
           });
         }

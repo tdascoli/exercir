@@ -25,7 +25,8 @@
     "ng-lodash": "latest",
     "ng-tags-input": "latest",
     "showdown": "latest",
-    "ng-file-upload": "latest"
+    "ng-file-upload": "latest",
+    "pdfmake":"latest"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.6"

@@ -31,40 +31,35 @@
         </div>
       </div>
 
-      <div class="unigrid--row">
+      <div class="unigrid--row" ng-if="showExercise(trainingExercise.exerciseId).aufbau">
         <div class="brick brick--24">
           <span class="fake-label">Aufbau</span>
           <span class="fake-input" ng-bind-html="convertToHtml(showExercise(trainingExercise.exerciseId).aufbau)"></span>
         </div>
       </div>
 
-      <div class="unigrid--row">
+      <div class="unigrid--row" ng-if="showExercise(trainingExercise.exerciseId).coaching">
         <div class="brick brick--24">
           <span class="fake-label">Coaching</span>
           <span class="fake-input" ng-bind-html="convertToHtml(showExercise(trainingExercise.exerciseId).coaching)"></span>
         </div>
       </div>
 
-      <div class="unigrid--row">
+      <div class="unigrid--row" ng-if="showExercise(trainingExercise.exerciseId).variationen">
         <div class="brick brick--24">
           <span class="fake-label">Variationen</span>
           <span class="fake-input" ng-bind-html="convertToHtml(showExercise(trainingExercise.exerciseId).variationen)"></span>
         </div>
       </div>
 
-      <div class="unigrid--row">
+      <div class="unigrid--row" ng-if="trainingExercise.bemerkungen">
         <div class="brick brick--24">
-          <div class="form-group">
-            <label for="trainingExercise.bemerkungen">Bemerkungen</label>
-            <textarea rows="3" class="form-control" id="trainingExercise.bemerkungen"
-                      ng-model="trainingExercise.bemerkungen"
-                      ng-if="!showHtmlText"></textarea>
-            <div ng-bind-html="convertToHtml(trainingExercise.bemerkungen)" ng-show="showHtmlText"
-                 class="fake-input"></div>
-          </div>
+          <span class="fake-label">Bemerkungen</span>
+          <div class="fake-input" ng-bind-html="convertToHtml(trainingExercise.bemerkungen)"></div>
         </div>
       </div>
 
+      <hr />
     </div>
   </div>
 
@@ -74,7 +69,8 @@
     <button type="submit" ui-sref="collections/create.step1({collectionId: collection.$id})">Bearbeiten</button>
   </div>
   <div class="brick brick--21">
-    <button>Drucken</button>
-    <button>Herunterladen</button>
+    <button ng-click="makePDF('open')">Vorschau</button>
+    <button ng-click="makePDF('print')">Drucken</button>
+    <button ng-click="makePDF('download')">Herunterladen</button>
   </div>
 </div>
