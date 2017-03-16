@@ -56,14 +56,14 @@
       </div>
 
       <div class="brick brick--7">
-        <span ng-bind-html="convertToHtml(showExercise(trainingExercise.exerciseId).description)"></span>
+        <span markdown-it="showExercise(trainingExercise.exerciseId).description"></span>
       </div>
       <div class="brick brick--6">
         <img class="training__exercise-image" data-ng-src="{{showExercise(trainingExercise.exerciseId).graphic}}" />
       </div>
       <div class="brick brick--7">
-        <span ng-bind-html="convertToHtml(showExercise(trainingExercise.exerciseId).aufbau)"></span>
-        <span ng-bind-html="convertToHtml(showExercise(trainingExercise.exerciseId).coaching)"></span>
+        <span markdown-it="showExercise(trainingExercise.exerciseId).aufbau"></span>
+        <span markdown-it="showExercise(trainingExercise.exerciseId).coaching"></span>
       </div>
 
       <div class="brick brick--2">
@@ -78,7 +78,7 @@
   <div class="unigrid--row unigrid--border" ng-if="training.bemerkungen">
     <div class="brick brick--24">
       <span class="fake-label">Bemerkungen</span>
-      <div ng-bind-html="convertToHtml(training.bemerkungen)"></div>
+      <div markdown-it="training.bemerkungen"></div>
     </div>
   </div>
 

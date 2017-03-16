@@ -34,15 +34,19 @@ angular.module('exercirApp')
     }
 
     // MARKDOWN
-    var converter = new showdown.Converter();
+    //var converter = new showdown.Converter();
+    //var md = new MarkdownIt();
     $scope.showHtmlText = false;
     $scope.showHtml = function () {
       $scope.showHtmlText = !$scope.showHtmlText;
     };
 
-    $scope.convertToHtml = function (markdown) {
-      return $sce.trustAsHtml(converter.makeHtml(markdown));
-    };
+    /*
+     $scope.convertToHtml = function (markdown) {
+     //return $sce.trustAsHtml(converter.makeHtml(markdown));
+     return $sce.trustAsHtml(md.render(markdown));
+     };
+     */
 
     // PDF
     $scope.makePDF=function(output){

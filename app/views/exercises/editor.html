@@ -46,20 +46,20 @@
     <div class="form-required form-group form-group-full-height">
       <label>Beschreibung</label>
       <textarea class="form-control form-full-height"  ng-model="exercise.description" required ng-if="!showHtmlText"></textarea>
-      <div ng-bind-html="convertToHtml(exercise.description)" ng-show="showHtmlText" class="fake-input form-full-height"></div>
+      <div markdown-it="exercise.description" ng-show="showHtmlText" class="fake-input form-full-height"></div>
     </div>
   </div>
   <div class="brick brick--8">
     <div class="form-group form-group-half-height">
       <label for="exercise.aufbau">Aufbau</label>
       <textarea class="form-control form-half-height" id="exercise.aufbau" ng-model="exercise.aufbau" ng-if="!showHtmlText"></textarea>
-      <div ng-bind-html="convertToHtml(exercise.aufbau)" ng-show="showHtmlText" class="fake-input form-half-height"></div>
+      <div markdown-it="exercise.aufbau" ng-show="showHtmlText" class="fake-input form-half-height"></div>
     </div>
 
     <div class="form-group form-group-half-height">
       <label for="exercise.coaching">Coaching</label>
       <textarea class="form-control form-half-height" id="exercise.coaching" ng-model="exercise.coaching" ng-if="!showHtmlText"></textarea>
-      <div ng-bind-html="convertToHtml(exercise.coaching)" ng-show="showHtmlText" class="fake-input form-half-height"></div>
+      <div markdown-it="exercise.coaching" ng-show="showHtmlText" class="fake-input form-half-height"></div>
     </div>
   </div>
 </div>
@@ -69,14 +69,14 @@
     <div class="form-group">
       <label>Variationen</label>
       <textarea rows="3" class="form-control" ng-model="exercise.variationen" ng-if="!showHtmlText"></textarea>
-      <div ng-bind-html="convertToHtml(exercise.variationen)" ng-show="showHtmlText" class="fake-input"></div>
+      <div markdown-it="exercise.variationen" ng-show="showHtmlText" class="fake-input"></div>
     </div>
   </div>
   <div class="brick brick--12">
     <div class="form-group">
       <label for="exercise.bemerkungen">Bemerkungen</label>
       <textarea rows="3" class="form-control" id="exercise.bemerkungen" ng-model="exercise.bemerkungen" ng-if="!showHtmlText"></textarea>
-      <div ng-bind-html="convertToHtml(exercise.bemerkungen)" ng-show="showHtmlText" class="fake-input"></div>
+      <div markdown-it="exercise.bemerkungen" ng-show="showHtmlText" class="fake-input"></div>
     </div>
   </div>
 </div>

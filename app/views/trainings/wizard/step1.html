@@ -44,7 +44,7 @@
       <label for="training.bemerkungen">Bemerkungen</label>
       <textarea rows="3" class="form-control" id="training.bemerkungen" ng-model="training.bemerkungen"
                 ng-if="!showHtmlText"></textarea>
-      <div ng-bind-html="convertToHtml(training.bemerkungen)" ng-show="showHtmlText" class="fake-input"></div>
+      <div markdown-it="training.bemerkungen" ng-show="showHtmlText" class="fake-input"></div>
     </div>
   </div>
 </div>

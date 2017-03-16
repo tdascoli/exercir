@@ -27,35 +27,35 @@
         <div class="brick brick--12">
           <span class="fake-label">Beschreibung</span>
           <span class="fake-input"
-                ng-bind-html="convertToHtml(showExercise(trainingExercise.exerciseId).description)"></span>
+                markdown-it="showExercise(trainingExercise.exerciseId).description"></span>
         </div>
       </div>
 
       <div class="unigrid--row" ng-if="showExercise(trainingExercise.exerciseId).aufbau">
         <div class="brick brick--24">
           <span class="fake-label">Aufbau</span>
-          <span class="fake-input" ng-bind-html="convertToHtml(showExercise(trainingExercise.exerciseId).aufbau)"></span>
+          <span class="fake-input" markdown-it="showExercise(trainingExercise.exerciseId).aufbau"></span>
         </div>
       </div>
 
       <div class="unigrid--row" ng-if="showExercise(trainingExercise.exerciseId).coaching">
         <div class="brick brick--24">
           <span class="fake-label">Coaching</span>
-          <span class="fake-input" ng-bind-html="convertToHtml(showExercise(trainingExercise.exerciseId).coaching)"></span>
+          <span class="fake-input" markdown-it="showExercise(trainingExercise.exerciseId).coaching"></span>
         </div>
       </div>
 
       <div class="unigrid--row" ng-if="showExercise(trainingExercise.exerciseId).variationen">
         <div class="brick brick--24">
           <span class="fake-label">Variationen</span>
-          <span class="fake-input" ng-bind-html="convertToHtml(showExercise(trainingExercise.exerciseId).variationen)"></span>
+          <span class="fake-input" markdown-it="showExercise(trainingExercise.exerciseId).variationen"></span>
         </div>
       </div>
 
       <div class="unigrid--row" ng-if="trainingExercise.bemerkungen">
         <div class="brick brick--24">
           <span class="fake-label">Bemerkungen</span>
-          <div class="fake-input" ng-bind-html="convertToHtml(trainingExercise.bemerkungen)"></div>
+          <div class="fake-input" markdown-it="trainingExercise.bemerkungen"></div>
         </div>
       </div>
 

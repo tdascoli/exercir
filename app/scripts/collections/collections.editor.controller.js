@@ -2,7 +2,7 @@
   'use strict';
 
 angular.module('exercirApp')
-  .controller('CollectionsEditorCtrl', function ($scope, $sce, $stateParams, $q, Ref, lodash, collections, exercises) {
+  .controller('CollectionsEditorCtrl', function ($rootScope, $scope, $sce, $stateParams, $q, Ref, lodash, moment, collections, exercises) {
 
     $scope.loadTags = function(query) {
       return $q(function(resolve) {
@@ -28,6 +28,7 @@ angular.module('exercirApp')
 
     $scope.training = {};
     $scope.training.timestamp = firebase.database.ServerValue.TIMESTAMP;
+    $scope.training.trainer = $rootScope.profile.name;
 
     if ($stateParams.collectionId !== undefined) {
       $scope.training = $scope.collections.$getRecord($stateParams.collectionId);
@@ -39,17 +40,30 @@ angular.module('exercirApp')
     };
 
     // MARKDOWN
-    var converter = new showdown.Converter();
     $scope.showHtmlText = false;
     $scope.showHtml = function () {
       $scope.showHtmlText = !$scope.showHtmlText;
     };
 
-    $scope.convertToHtml = function (markdown) {
-      return $sce.trustAsHtml(converter.makeHtml(markdown));
-    };
-
     // PDF
+    /*
+    $scope.makePDF=function(output){
+      var docDefinition = PDFMakeService.makePdf($scope.training);
+
+      if (output==='open') {
+        // open the PDF in a new window
+        pdfMake.createPdf(docDefinition).open();
+      }
+      if (output==='print') {
+        // print the PDF
+        pdfMake.createPdf(docDefinition).print();
+      }
+      if (output==='download') {
+        // download the PDF / training.team - training.trainingDate
+        pdfMake.createPdf(docDefinition).download($scope.training.titel+'.pdf');
+      }
+    };
+    */
     $scope.makePDF=function(output){
       var i=0;
       var collections=[];
@@ -90,7 +104,7 @@ angular.module('exercirApp')
             headerRows: 1,
             body: [
               [{text:'Grafik', style: 'collectionHeader'},{text:'Beschreibung', style: 'collectionHeader'}],
-              [{image: exercise.graphic, width: 200},exercise.description]
+              [{image: exercise.graphic, width: 250}, markdownToPdfmake(exercise.description)]
             ]
           }
         });
@@ -103,7 +117,7 @@ angular.module('exercirApp')
             headerRows: 1,
             body: [
               [{text:'Aufbau', style: 'collectionHeader'}],
-              [exercise.aufbau || ' ']
+              [markdownToPdfmake(exercise.aufbau) || ' ']
             ]
           }
         });
@@ -116,7 +130,7 @@ angular.module('exercirApp')
             headerRows: 1,
             body: [
               [{text:'Coaching', style: 'collectionHeader'}],
-              [exercise.coaching || ' ']
+              [markdownToPdfmake(exercise.coaching) || ' ']
             ]
           }
         });
@@ -129,7 +143,7 @@ angular.module('exercirApp')
             headerRows: 1,
             body: [
               [{text:'Variationen', style: 'collectionHeader'}],
-              [exercise.variationen || ' ']
+              [markdownToPdfmake(exercise.variationen) || ' ']
             ]
           }
         });
@@ -142,7 +156,7 @@ angular.module('exercirApp')
             headerRows: 1,
             body: [
               [{text:'Bemerkungen', style: 'collectionHeader'}],
-              [trainingExercise.bemerkungen || ' ']
+              [markdownToPdfmake(trainingExercise.bemerkungen) || ' ']
             ]
           }
         });
@@ -157,18 +171,41 @@ angular.module('exercirApp')
         pageOrientation: 'portrait',
 
         // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
-        pageMargins: [ 20, 40 ],
+        pageMargins: [ 20, 40, 20, 60 ],
 
-        footer: { text: 'exercir (c) tdascoli', alignment: 'right', margin: 20 },
+        footer: {columns: [
+          { width: '50%', text: moment($scope.training.timestamp).format('DD.MM.YYYY')+' '+$scope.training.trainer, fontSize: 10 },
+          { width: '50%', text: 'exercir © tdascoli', fontSize: 10, alignment: 'right' }
+        ], margin: 20},
 
         content: collections,
+        // todo markdown styles
         styles: {
           tableCollection: {
-            margin: [0, 20, 0, 0]
+            margin: [0, 20, 0, 0],
+            fontSize: 10
           },
           collectionHeader: {
             fillColor: '#ff0000',
             bold: true
+          },
+          mdH1: {
+            fontSize: 42,
+            bold: true
+          },
+          mdH2: {
+            fontSize: 28,
+            bold: true
+          },
+          mdBold: {
+            bold: true
+          },
+          mdItalic: {
+            italic: true
+          },
+          mdBoldItalic: {
+            bold: true,
+            italic: true
           }
         }
       };

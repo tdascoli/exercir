@@ -32,6 +32,19 @@ body {
 .navbar > .container .navbar-brand {
   margin-left: 0;
 }
+.navbar-nav a {
+  text-decoration: none;
+  box-shadow: inset 0 -3px 0 #fff;
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+.navbar-nav a:hover {
+  color: #adadad;
+  text-decoration: none;
+  box-shadow: inset 0 -3px 0 #adadad;
+}
 .fake-label {
   width: 100%;
   display: block;

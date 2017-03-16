@@ -76,7 +76,7 @@ body {
   display: inline-block; }
 
 .navbar-header + div {
-  width: calc(61.8034% - 48px);
+  width: 61.8034%;
   display: inline-block; }
 
 .navbar .c-hamburger {
@@ -91,15 +91,34 @@ a.navbar-brand {
   line-height: normal; }
 
 .navbar-nav {
-  list-style-type: none; }
+  list-style-type: none;
+  padding: 0;
+  margin: 23px 0 0 0;
+  height: 40px; }
   .navbar-nav a,
   .navbar-nav a:visited {
-    color: #fff; }
+    color: #fff;
+    text-decoration: none;
+    box-shadow: inset 0 -3px 0 #fff;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    padding-bottom: 3px; }
+  .navbar-nav a:hover {
+    box-shadow: inset 0 -3px 0 #dfdfdf; }
   .navbar-nav a.is-active {
-    background: darkgrey; }
+    background: #dfdfdf; }
+
+.navbar-right {
+  float: right; }
+
+.navbar-nav .navbar-search a,
+.navbar-nav .navbar-account a {
+  box-shadow: none; }
 
 .nav > li {
-  margin: 3px;
+  margin: 9px 3px;
   display: inline-block; }
 
 .nav > li:first-child {

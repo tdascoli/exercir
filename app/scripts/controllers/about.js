@@ -20,4 +20,6 @@ angular.module('exercirApp')
       chosenClass: 'sortable-chosen',
       forceFallback: true
     };
+
+
   });

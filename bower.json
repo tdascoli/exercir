@@ -17,6 +17,7 @@
     "angular-route": "~1.4.6",
     "angular-sanitize": "~1.4.6",
     "angular-touch": "~1.4.6",
+    "angular-markdown-it":"latest",
     "ng-sortable":"latest",
     "sortablejs":"latest",
     "detect-mobile-browser": "latest",
@@ -24,7 +25,6 @@
     "moment": "latest",
     "ng-lodash": "latest",
     "ng-tags-input": "latest",
-    "showdown": "latest",
     "ng-file-upload": "latest",
     "pdfmake":"latest"
   },

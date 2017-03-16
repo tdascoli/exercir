@@ -46,13 +46,13 @@
           </div>
 
           <div class="drawer-contents">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav navbar-right">
               <li class="active"><a ui-sref="home">Home</a></li>
-              <li><a ui-sref="reviews">Game Reviews</a></li>
-              <li><a ui-sref="trainings">Trainings</a></li>
-              <li><a ui-sref="exercises">Exercises</a></li>
-              <li><a ui-sref="account">Account</a></li>
-              <li><a ui-sref="about">About</a></li>
+              <li ng-show-auth="true"><a ui-sref="reviews">Game Reviews</a></li>
+              <li ng-show-auth="true"><a ui-sref="trainings">Trainings</a></li>
+              <li ng-show-auth="true"><a ui-sref="exercises">Exercises</a></li>
+              <li ng-show-auth="true"><a ui-sref="account">Account</a></li>
+              <li ng-show-auth="true"><a ui-sref="about"><i class="fa fa-lock" aria-hidden="true"></i> Admin</a></li>
               <li><a ng-click="logout()">Logout</a></li>
             </ul>
           </div>
@@ -88,6 +88,8 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/markdown-it/dist/markdown-it.js"></script>
+    <script src="bower_components/angular-markdown-it/dist/ng-markdownit.js"></script>
     <script src="bower_components/ng-sortable/dist/ng-sortable.js"></script>
     <script src="bower_components/sortablejs/Sortable.js"></script>
     <script src="bower_components/detect-mobile-browser/detectmobilebrowser.js"></script>
@@ -95,7 +97,6 @@
     <script src="bower_components/angular-moment/angular-moment.js"></script>
     <script src="bower_components/ng-lodash/build/ng-lodash.js"></script>
     <script src="bower_components/ng-tags-input/ng-tags-input.js"></script>
-    <script src="bower_components/showdown/dist/showdown.js"></script>
     <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
     <script src="bower_components/pdfmake/build/pdfmake.js"></script>
     <script src="bower_components/pdfmake/build/vfs_fonts.js"></script>
@@ -106,6 +107,8 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/about.js"></script>
+
+    <script src="scripts/pdfmake/pdfmake.service.js"></script>
 
     <script src="scripts/auth/auth.controller.js"></script>
     <script src="scripts/auth/auth.service.js"></script>
@@ -133,6 +136,7 @@
 
     <script src="https://use.fontawesome.com/e872280775.js"></script>
 
+    <script src="scripts/3rd/renderer.js"></script>
     <script src="scripts/3rd/jquery-1.10.2.min.js"></script>
     <script src="scripts/3rd/jquery.fancybox.pack.js"></script>
     <script type="text/javascript">

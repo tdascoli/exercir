@@ -2,7 +2,7 @@
   'use strict';
 
 angular.module('exercirApp')
-  .controller('TrainingsEditorCtrl', function ($scope, $sce, $stateParams, $q, Ref, lodash, trainings, exercises) {
+  .controller('TrainingsEditorCtrl', function ($rootScope, $scope, $sce, $stateParams, $q, $firebaseArray, Ref, lodash, trainings, exercises) {
 
     $scope.loadTags = function(query) {
       return $q(function(resolve) {
@@ -31,6 +31,7 @@ angular.module('exercirApp')
 
     $scope.training = {};
     $scope.training.timestamp = firebase.database.ServerValue.TIMESTAMP;
+    $scope.training.trainer = $rootScope.profile.name;
 
     if ($stateParams.trainingId !== undefined) {
       $scope.training = $scope.trainings.$getRecord($stateParams.trainingId);
@@ -126,14 +127,9 @@ angular.module('exercirApp')
     };
 
     // MARKDOWN
-    var converter = new showdown.Converter();
     $scope.showHtmlText = false;
     $scope.showHtml = function () {
       $scope.showHtmlText = !$scope.showHtmlText;
-    };
-
-    $scope.convertToHtml = function (markdown) {
-      return $sce.trustAsHtml(converter.makeHtml(markdown));
     };
 
     // PDF
@@ -145,14 +141,21 @@ angular.module('exercirApp')
       trainingsinhalt=trainingsinhalt.substr(0,(trainingsinhalt.length-2));
 
       var trainings=[];
-      trainings.push(['Lektionsteil', 'Beschreibung', 'Organisation', 'Coaching','Dauer']);
+      trainings.push([
+        {text:'Lektionsteil', style: 'tableHeader'},
+        {text:'Beschreibung', style: 'tableHeader'},
+        {text:'Organisation', style: 'tableHeader'},
+        {text:'Coaching', style: 'tableHeader'},
+        {text:'Dauer', style: 'tableHeader'}
+      ]);
+
       angular.forEach($scope.training.exercises, function (trainingExercise) {
         var exercise=$scope.showExercise(trainingExercise.exerciseId);
         var training=[];
         training.push(trainingExercise.lektionsteil || '-');
-        training.push(exercise.description || ' ');
+        training.push(markdownToPdfmake(exercise.description) || ' ');
         training.push({image: exercise.graphic, width: 200});
-        training.push(exercise.coaching || ' ');
+        training.push(markdownToPdfmake(exercise.coaching) || ' ');
         training.push(trainingExercise.dauer || '-');
         trainings.push(training);
       });
@@ -165,9 +168,13 @@ angular.module('exercirApp')
         pageOrientation: 'landscape',
 
         // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
-        pageMargins: [ 20, 40 ],
+        pageMargins: [ 20, 40, 20, 60 ],
 
-        footer: { text: 'exercir (c) tdascoli', alignment: 'right', margin: 20 },
+        // standard footer
+        footer: {columns: [
+          { width: '50%', text: moment($scope.training.timestamp).format('DD.MM.YYYY')+' '+$scope.training.trainer, fontSize: 10 },
+          { width: '50%', text: 'exercir © tdascoli', fontSize: 10, alignment: 'right' }
+        ], margin: 20},
 
         content: [
           {
@@ -181,7 +188,8 @@ angular.module('exercirApp')
               },
               { width: '50%', text: [{text: 'Trainingsinhalt\n', bold:true},trainingsinhalt] },
               { width: '25%', text: 'Logo', alignment: 'right' }
-            ]
+            ],
+            style: 'trainingHeader'
           },
           {
             style: 'tableTraining',
@@ -190,16 +198,28 @@ angular.module('exercirApp')
               headerRows: 1,
               body: trainings
             }
+          },
+          {
+            style: 'tableTraining',
+            table: {
+              widths: ['100%'],
+              body: [
+                {text: markdownToPdfmake($scope.training.bemerkungen)}
+              ]
+            }
           }
         ],
         styles: {
           tableTraining: {
-            margin: [0, 20, 0, 0]
+            margin: [0, 20, 0, 0],
+            fontSize: 10
           },
           tableHeader: {
             bold: true,
-              fontSize: 13,
-              color: 'black'
+            fontSize: 10
+          },
+          trainingHeader: {
+            fontSize: 10
           }
         }
       };
