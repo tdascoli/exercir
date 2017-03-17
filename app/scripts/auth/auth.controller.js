@@ -27,7 +27,6 @@ angular.module('exercirApp')
     };
 
     $scope.logout=function(){
-      // delete online...?!
       Auth.$signOut().then(function(){
         $state.go('login');
       });
