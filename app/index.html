@@ -48,11 +48,11 @@
           <div class="drawer-contents">
             <ul class="nav navbar-nav navbar-right">
               <li><a ui-sref="home">Home</a></li>
-              <li ng-show-auth="true"><a ui-sref="reviews">Game Reviews</a></li>
-              <li ng-show-auth="true"><a ui-sref="trainings">Trainings</a></li>
-              <li ng-show-auth="true"><a ui-sref="exercises">Exercises</a></li>
-              <li ng-show-auth="true"><a ui-sref="account">Account</a></li>
-              <li ng-show-auth="true"><a ui-sref="about"><i class="fa fa-lock" aria-hidden="true"></i> Admin</a></li>
+              <li ng-show-on-subscription="pro"><a ui-sref="reviews">Game Reviews</a></li>
+              <li ng-show-auth><a ui-sref="trainings">Trainings</a></li>
+              <li ng-show-auth><a ui-sref="exercises">Exercises</a></li>
+              <li ng-show-auth><a ui-sref="account">Account</a></li>
+              <li  ng-show-on-subscription="sysadmin"><a ui-sref="about"><i class="fa fa-lock" aria-hidden="true"></i> Admin</a></li>
               <li><a ng-click="logout()">Logout</a></li>
             </ul>
           </div>

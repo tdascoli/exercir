@@ -20,9 +20,9 @@
       <button type="submit" ng-click="saveCollection()">Speichern</button>
     </div>
     <div class="brick brick--21">
-      <button>Vorschau</button>
-      <button>Drucken</button>
-      <button>Herunterladen</button>
+      <button ng-click="makePDF('open')">Vorschau</button>
+      <button ng-click="makePDF('print')">Drucken</button>
+      <button ng-click="makePDF('download')">Herunterladen</button>
     </div>
   </div>
 </form>

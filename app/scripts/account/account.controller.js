@@ -8,7 +8,7 @@
  * Provides rudimentary account management functions.
  */
 angular.module('exercirApp')
-  .controller('AccountCtrl', function ($rootScope, $scope, $state, Organizations) {
+  .controller('AccountCtrl', function ($rootScope, $scope, $state, Upload, Organizations) {
 
     $scope.club={};
     if ($rootScope.profile.club!==undefined){
@@ -46,6 +46,14 @@ angular.module('exercirApp')
           console.log('update organization');
         });
       }
+    };
+
+    // UPLOAD
+    $scope.uploadPic = function (file) {
+      Upload.base64DataUrl(file).then(function (response) {
+        $scope.picFile = null;
+        $scope.club.logo = response;
+      });
     };
 
   });

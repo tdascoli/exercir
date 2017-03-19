@@ -10,6 +10,7 @@ function markdownToPdfmake(markdown){
   else {
     var constructor = window.markdownit || markdownit;
     var md = markdownItFactory(constructor);
+    //console.log(md.parse(markdown));
     return render(md.parse(markdown));
   }
 }

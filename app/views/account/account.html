@@ -1,63 +1,70 @@
-<div class="page-wrapper">
+<h1>Account</h1>
 
-  <div class="page-header">
-    <h1>Edit Profile</h1>
-  </div>
-
-  <form ng-submit="updateProfile()">
+<div class="unigrid--row has-toolbar">
+  <div class="brick brick--12">
+    <h2>Edit Profile</h2>
     <p ng-hide="profile.name">
       You'll need a display name.
     </p>
+    <pre>{{ profile | json}}</pre>
 
     <div class="form-required form-group">
       <label for="profile.name">Display Name</label>
       <input ng-model="profile.name" placeholder="Display Name" type="text" name="profile.name" id="profile.name" class="form-control" required />
     </div>
-    <!-- if club AND club.teans then select -->
+    <!-- if club AND club.teams then select -->
     <div class="form-group">
       <label for="profile.team">Team Name</label>
       <input ng-model="profile.team" placeholder="Team Name" type="text" name="profile.team" id="profile.team" class="form-control" />
     </div>
+  </div>
+  <div class="brick brick--12">
+    <h2>Edit Club</h2>
+    <div class="golden-ratio--row">
+      <div class="row--small">
+        <div class="upload">
+          <span class="fake-label">Logo</span>
 
-    <input type="submit" class="btn btn-default" value="Set Display Name" />
-  </form>
+          <img data-ng-src="{{club.logo}}" ng-if="club.logo" class="upload__image" />
+          <img ng-if="picFile" ngf-thumbnail="picFile" class="upload__thumb">
 
-</div>
+          <div class="upload__toolbar">
+            <div class="btn-default" ngf-select ng-model="picFile" ngf-multiple="false" accept="image/*" ngf-max-size="2MB" ngf-model-invalid="errorFile">Select File</div>
 
-<h1>Edit Club</h1>
+            <button ng-click="picFile = null" ng-show="picFile">Remove</button>
+            <button ng-click="uploadPic(picFile)">Upload</button>
+          </div>
+        </div>
+      </div>
+      <div class="row--tall">
+        <div class="form-required form-group">
+          <label for="club.name">Club Name</label>
+          <input ng-model="club.name" placeholder="Club Name" type="text" name="club.name" id="club.name" class="form-control" required />
+        </div>
 
-<div class="unigrid--row">
-  <div class="brick brick--8">
-    <div class="upload">
-      <span class="fake-label">Logo</span>
+        <div class="form-group">
+          <label for="club.colors">Colors</label>
+          <input ng-model="club.colors" placeholder="Colors" type="text" name="club.colors" id="club.colors" class="form-control" />
+        </div>
 
-      <img data-ng-src="{{club.logo}}" ng-if="club.logo" class="upload__image" />
-      <img ng-if="picFile" ngf-thumbnail="picFile" class="upload__thumb">
+        <div class="form-group">
+          <label for="club.teams">Teams</label>
+          <input ng-model="club.teams" placeholder="Teams" type="text" name="club.teams" id="club.teams" class="form-control" />
+        </div>
 
-      <div class="upload__toolbar">
-        <div class="btn-default" ngf-select ng-model="picFile" ngf-multiple="false" accept="image/*" ngf-max-size="2MB" ngf-model-invalid="errorFile">Select File</div>
+        <hr class="narrow" />
 
-        <button ng-click="picFile = null" ng-show="picFile">Remove</button>
-        <button ng-click="uploadPic(picFile)">Upload</button>
+        <strong>Members</strong>
       </div>
     </div>
   </div>
-  <div class="brick brick--16">
-    <div class="form-required form-group">
-      <label for="club.name">Club Name</label>
-      <input ng-model="club.name" placeholder="Club Name" type="text" name="club.name" id="club.name" class="form-control" required />
-    </div>
-
-    <div class="form-group">
-      <label for="club.colors">Colors</label>
-      <input ng-model="club.colors" placeholder="Colors" type="text" name="club.colors" id="club.colors" class="form-control" />
-    </div>
-
-    <div class="form-group">
-      <label for="club.teams">Teams</label>
-      <input ng-model="club.teams" placeholder="Teams" type="text" name="club.teams" id="club.teams" class="form-control" />
-    </div>
-  </div>
 </div>
 
-<button class="btn btn-default" ng-click="updateOrganization()">Save Club Details</button>
+<div class="unigrid--row training__toolbar">
+  <div class="brick brick--12">
+    <button class="btn btn-primary" ng-click="updateProfile()">Save Profile Details</button>
+  </div>
+  <div class="brick brick--12">
+    <button class="btn btn-default" ng-click="updateOrganization()">Save Club Details</button>
+  </div>
+</div>

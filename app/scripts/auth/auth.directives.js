@@ -77,4 +77,36 @@ angular.module('exercirApp')
         }
       }
     };
+  }])
+  /** show when expliciti subscriptions is needed */
+  .directive('ngShowOnSubscription', ['Auth', 'Users', '$timeout', function (Auth, Users, $timeout) {
+    'use strict';
+
+    return {
+      restrict: 'A',
+      link: function(scope, el, attrs) {
+        // subscriptions means more than basic!
+        var subscription = attrs.ngShowOnSubscription;
+        el.addClass('ng-cloak'); // hide until we process it
+
+        function update() {
+          el.addClass('ng-cloak');
+          // sometimes if ngCloak exists on same element, they argue, so make sure that
+          // this one always runs last for reliability
+
+          $timeout(function () {
+            if (!!Auth.$getAuth()){
+              Users.getProfile(Auth.$getAuth().uid).$loaded().then(function (user){
+                if (user.subscriptions.indexOf(subscription)>-1){
+                  el.toggleClass('ng-cloak');
+                }
+              });
+            }
+          }, 0);
+        }
+
+        Auth.$onAuthStateChanged(update);
+        update();
+      }
+    };
   }]);

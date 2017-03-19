@@ -1,13 +1,23 @@
 <h1>exercises - overview</h1>
 
-<div class="deck-list">
-  <div class="deck" ng-repeat="exercise in exercises">
-    <a ui-sref="exercises/exercise({exerciseId: exercise.$id})">{{ exercise.name }}</a> (<span>{{exercise.timestamp | amDateFormat:'DD.MM.YYYY HH:mm:ss'}}</span>)
-  </div>
-
-  <div class="deck create">
+<div class="unigrid--row">
+  <div class="brick brick--4">
     <a ui-sref="exercises/create">+ create exercise</a><br />
     <a ui-sref="exercises/graphics">+ create drawing</a><br />
     <a href="http://fussballtraining.com/ftg/" target="_blank">+ create drawing (ext)</a>
+  </div>
+
+  <div class="brick brick--20">
+
+    <div class="golden-ratio--row row--flex-height exercises--item" ng-repeat="exercise in exercises">
+      <div class="row--small">
+        <a class="exercises__title" ui-sref="exercises/exercise({exerciseId: exercise.$id})">{{ exercise.name }}</a><br />
+        <span>{{exercise.timestamp | amDateFormat:'DD.MM.YYYY HH:mm:ss'}}</span>
+      </div>
+      <div class="row--tall">
+        <span class="tag-item" ng-repeat="tags in exercise.content">{{ tags.text }}</span>
+      </div>
+    </div>
+
   </div>
 </div>

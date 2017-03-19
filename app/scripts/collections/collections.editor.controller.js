@@ -2,7 +2,7 @@
   'use strict';
 
 angular.module('exercirApp')
-  .controller('CollectionsEditorCtrl', function ($rootScope, $scope, $sce, $stateParams, $q, Ref, lodash, moment, collections, exercises) {
+  .controller('CollectionsEditorCtrl', function ($rootScope, $scope, $sce, $stateParams, $q, Ref, lodash, moment, PDFMakeService, collections, exercises) {
 
     $scope.loadTags = function(query) {
       return $q(function(resolve) {
@@ -27,17 +27,30 @@ angular.module('exercirApp')
     $scope.collections = collections;
 
     $scope.training = {};
+    $scope.trainingExercises = [];
     $scope.training.timestamp = firebase.database.ServerValue.TIMESTAMP;
     $scope.training.trainer = $rootScope.profile.name;
 
     if ($stateParams.collectionId !== undefined) {
       $scope.training = $scope.collections.$getRecord($stateParams.collectionId);
+      $scope.trainingExercises = prepareExercises();
     }
 
     $scope.showExercise=function(exerciseId){
-      var exercise = lodash.filter($scope.exercises, ['$id', exerciseId]);
+      var exercise = lodash.filter($scope.trainingExercises, ['$id', exerciseId]);
       return exercise[0];
     };
+
+    function prepareExercises(){
+      var map = lodash.map($scope.training.exercises, 'exerciseId');
+      var exercises = lodash.filter($scope.exercises, function(o) {
+        if (map.indexOf(o.$id)>-1){
+          return o;
+        }
+        return false;
+      });
+      return exercises;
+    }
 
     // MARKDOWN
     $scope.showHtmlText = false;
@@ -46,123 +59,16 @@ angular.module('exercirApp')
     };
 
     // PDF
-    /*
     $scope.makePDF=function(output){
-      var docDefinition = PDFMakeService.makePdf($scope.training);
-
-      if (output==='open') {
-        // open the PDF in a new window
-        pdfMake.createPdf(docDefinition).open();
-      }
-      if (output==='print') {
-        // print the PDF
-        pdfMake.createPdf(docDefinition).print();
-      }
-      if (output==='download') {
-        // download the PDF / training.team - training.trainingDate
-        pdfMake.createPdf(docDefinition).download($scope.training.titel+'.pdf');
-      }
-    };
-    */
-    $scope.makePDF=function(output){
-      var i=0;
-      var collections=[];
-      collections.push({text:$scope.training.titel,bold:true,fontSize:18});
-      angular.forEach($scope.training.exercises, function (trainingExercise) {
-        var exercise=$scope.showExercise(trainingExercise.exerciseId);
-        var collection=[];
-
-        // PageBreak
-        if (i>0) {
-          collection.push({text: '', pageBreak: 'before'});
+      var map = lodash.map($scope.training.exercises, 'exerciseId');
+      var exercises = lodash.filter($scope.exercises, function(o) {
+        if (map.indexOf(o.$id)>-1){
+          return o;
         }
-        i++;
-
-        // Trainingsinhalt
-        var trainingsinhalt='';
-        angular.forEach(trainingExercise.content, function(value){
-          trainingsinhalt+=value.text+', ';
-        });
-        trainingsinhalt=trainingsinhalt.substr(0,(trainingsinhalt.length-2));
-        collection.push({
-          style: 'tableCollection',
-          table: {
-            widths: ['100%'],
-            headerRows: 1,
-            body: [
-              [{text:'Trainingsinhalt', style: 'collectionHeader'}],
-              [trainingsinhalt]
-            ]
-          }
-        });
-
-        // Grafik/Beschreibung
-        collection.push({
-          style: 'tableCollection',
-          table: {
-            widths: ['50%','50%'],
-            headerRows: 1,
-            body: [
-              [{text:'Grafik', style: 'collectionHeader'},{text:'Beschreibung', style: 'collectionHeader'}],
-              [{image: exercise.graphic, width: 250}, markdownToPdfmake(exercise.description)]
-            ]
-          }
-        });
-
-        // Aufbau
-        collection.push({
-          style: 'tableCollection',
-          table: {
-            widths: ['100%'],
-            headerRows: 1,
-            body: [
-              [{text:'Aufbau', style: 'collectionHeader'}],
-              [markdownToPdfmake(exercise.aufbau) || ' ']
-            ]
-          }
-        });
-
-        // Coaching
-        collection.push({
-          style: 'tableCollection',
-          table: {
-            widths: ['100%'],
-            headerRows: 1,
-            body: [
-              [{text:'Coaching', style: 'collectionHeader'}],
-              [markdownToPdfmake(exercise.coaching) || ' ']
-            ]
-          }
-        });
-
-        // Variationen
-        collection.push({
-          style: 'tableCollection',
-          table: {
-            widths: ['100%'],
-            headerRows: 1,
-            body: [
-              [{text:'Variationen', style: 'collectionHeader'}],
-              [markdownToPdfmake(exercise.variationen) || ' ']
-            ]
-          }
-        });
-
-        // Bemerkungen
-        collection.push({
-          style: 'tableCollection',
-          table: {
-            widths: ['100%'],
-            headerRows: 1,
-            body: [
-              [{text:'Bemerkungen', style: 'collectionHeader'}],
-              [markdownToPdfmake(trainingExercise.bemerkungen) || ' ']
-            ]
-          }
-        });
-        collections.push(collection);
+        return false;
       });
-
+      var docDefinition = PDFMakeService.makeCollectionDFB($scope.training,exercises);
+      /*
       var docDefinition = {
         // a string or { width: number, height: number }
         pageSize: 'A4',
@@ -171,7 +77,7 @@ angular.module('exercirApp')
         pageOrientation: 'portrait',
 
         // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
-        pageMargins: [ 20, 40, 20, 60 ],
+        pageMargins: [0, 60, 0, 40],
 
         footer: {columns: [
           { width: '50%', text: moment($scope.training.timestamp).format('DD.MM.YYYY')+' '+$scope.training.trainer, fontSize: 10 },
@@ -179,37 +85,41 @@ angular.module('exercirApp')
         ], margin: 20},
 
         content: collections,
-        // todo markdown styles
         styles: {
           tableCollection: {
-            margin: [0, 20, 0, 0],
-            fontSize: 10
+            margin: [0, 20, 0, 0]
           },
           collectionHeader: {
             fillColor: '#ff0000',
             bold: true
           },
-          mdH1: {
-            fontSize: 42,
+          dfbTable: {
+            fillColor: '#20ae80',
+            color: '#ffffff',
+            margin: [0, 0, 0, 20]
+          },
+          dfbTrainingTable: {
+
+          },
+          dfbHeader: {
+            margin: [10, 2],
+            fontSize: 14,
             bold: true
           },
-          mdH2: {
-            fontSize: 28,
+          dfbBox: {
+            margin: [20]
+          },
+          dfbLabel: {
+            color: '#20ae80',
+            fontSize: 10,
             bold: true
           },
-          mdBold: {
-            bold: true
-          },
-          mdItalic: {
-            italic: true
-          },
-          mdBoldItalic: {
-            bold: true,
-            italic: true
+          dfbText: {
+            fontSize: 10
           }
         }
       };
-
+      */
       if (output==='open') {
         // open the PDF in a new window
         pdfMake.createPdf(docDefinition).open();
