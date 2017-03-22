@@ -25,9 +25,8 @@
 
   <div class="unigrid--row unigrid--border training__exercise" ng-repeat="trainingExercise in training.exercises track by $index">
     <div class="training__action">
-      <button ng-click="removeExercise($index)"><i class="fa fa-trash" aria-hidden="true"></i></button>
-      <br />
-      <button ng-click="toggleEditExercise($index)"><i class="fa fa-pencil" aria-hidden="true" ng-if="!isEdit($index)"></i><i class="fa fa-check" aria-hidden="true" ng-if="isEdit($index)"></i></button>
+      <button class="narrow" ng-click="removeExercise($index)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+      <button class="narrow" ng-click="toggleEditExercise($index)"><i class="fa fa-pencil" aria-hidden="true" ng-if="!isEdit($index)"></i><i class="fa fa-check" aria-hidden="true" ng-if="isEdit($index)"></i></button>
       <!--
       <br />
       <button><i class="fa fa-arrows" aria-hidden="true"></i></button>

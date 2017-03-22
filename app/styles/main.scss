@@ -39,8 +39,12 @@ a:hover {
   padding: 5px;
   text-align: center;
 }
-.btn-toolbar:hover {
+.btn-toolbar:hover,
+.btn-toolbar.is-active {
   background: #ccc;
+}
+.btn-toolbar.btn-block {
+  text-align: left;
 }
 
 // reset bootstrap
@@ -79,7 +83,7 @@ a:hover {
   width: 100%;
   display: block;
   font-weight: 700;
-  padding: 6px 0;
+  padding: 6px 0 0 0;
   line-height: 23px;
 }
 .fake-label-margin {
@@ -188,9 +192,9 @@ tags-input .tags .input {
 .training__action {
   display: none;
   position: absolute;
-  left: -55px;
-  width: 45px;
-  padding: 5px;
+  left: -64px;
+  width: 60px;
+  padding: 2px;
   background: #eeeeee;
 
   border-top-left-radius: 5px;
@@ -201,7 +205,7 @@ tags-input .tags .input {
 }
 .training__exercise:hover {
   background: #eeeeee;
-  transition: background-color 0.5s ease;
+  transition: all 0.5s ease;
 }
 .training__exercise:hover .training__action {
   display: block;
@@ -248,9 +252,55 @@ tags-input .tags .input {
 .exercises__title {
   font-weight: 700;
 }
-.exercises--item {
+
+.exercises--item,
+.trainings--item{
+  position: relative;
+
   height: auto;
   min-height: 50px;
+  border-top: 2px solid #eeeeee;
+  transition: background-color 0.5s ease;
+  padding: 5px 0;
+}
+.exercises--item .row--small,
+.trainings--item .row--small,
+.exercises--item .row--tall,
+.trainings--item .row--tall {
+  margin: 0 2px;
+}
+.exercises--item:first-child,
+.trainings--item:first-child {
+  border-top: none;
+}
+.exercises--item:hover,
+.trainings--item:hover{
+  background: #eeeeee;
+}
+.exercises--item__action,
+.trainings--item__action {
+  display: none;
+  position: absolute;
+  left: -64px;
+  top: -2px;
+  width: 60px;
+  padding: 2px;
+  background: #eeeeee;
+
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.trainings--item__action {
+  left: -94px;
+  width: 90px;
+}
+.exercises--item:first-child .exercises--item__action,
+.trainings--item:first-child .trainings--item__action{
+  top: 0;
+}
+.exercises--item:hover .exercises--item__action,
+.trainings--item:hover .trainings--item__action {
+  display: block;
 }
 
 /* divers */
@@ -277,6 +327,10 @@ hr.invisible {
 button.narrow,
 .btn-default.narrow {
   padding: 3px 6px;
+}
+.graphics__toolbar button.narrow,
+.graphics__toolbar .btn-default.narrow {
+  margin: 0;
 }
 a.wizard {
   width:25px;
