@@ -2,7 +2,7 @@
   'use strict';
 
 angular.module('exercirApp')
-  .controller('ExercisesCtrl', function ($scope, $sce, $stateParams, $q, Ref, Upload, exercises) {
+  .controller('ExercisesCtrl', function ($scope, $sce, $stateParams, $q, Ref, Upload, lodash, exercises) {
 
 
     $scope.loadTags = function(query) {
@@ -33,19 +33,68 @@ angular.module('exercirApp')
     }
 
     // MARKDOWN
-    //var converter = new showdown.Converter();
-    //var md = new MarkdownIt();
     $scope.showHtmlText = false;
     $scope.showHtml = function () {
       $scope.showHtmlText = !$scope.showHtmlText;
     };
 
-    /*
-     $scope.convertToHtml = function (markdown) {
-     //return $sce.trustAsHtml(converter.makeHtml(markdown));
-     return $sce.trustAsHtml(md.render(markdown));
-     };
-     */
+    // SEARCH
+    $scope.searchResult=$scope.exercises;
+
+    $scope.$watch('search', function() {
+      if ($scope.search!==undefined) {
+        $scope.searchTerm();
+      }
+    }, true);
+
+    function checkExerciseObject(exObj){
+      var isInObj=false;
+      if (exObj!==undefined) {
+        if (checkExerciseString(exObj.name) || checkExerciseString(exObj.description) || checkExerciseContent(exObj.content)) {
+          isInObj = true;
+        }
+      }
+      return isInObj;
+    }
+
+    function checkExerciseContent(exCon){
+      var isInCon=false;
+      angular.forEach(exCon, function (value) {
+        if (checkExerciseString(lodash.toLower(value.text))){
+          isInCon=true;
+        }
+      });
+      return isInCon;
+    }
+
+    function checkExerciseString(esStr){
+      var isInStr=false;
+      angular.forEach($scope.search, function (value) {
+        if (lodash.toLower(esStr).indexOf(lodash.toLower(value.text))>=0){
+          isInStr=true;
+        }
+      });
+      return isInStr;
+    }
+
+    $scope.searchTerm=function () {
+      if ($scope.search.length===0){
+        $scope.searchResult=$scope.exercises;
+      }
+      else {
+        $scope.searchResult = lodash.filter($scope.exercises, function (o) {
+          return checkExerciseObject(o);
+        });
+      }
+    };
+
+    $scope.filterBy=function(){
+      var filterBy=[];
+      angular.forEach($scope.exercises, function(value){
+        filterBy.push(value.exerciseId);
+      });
+      return filterBy;
+    };
 
     // UPLOAD
     $scope.uploadPic = function (file) {
@@ -69,5 +118,28 @@ angular.module('exercirApp')
       }
     };
   });
+
+
+  angular.module('exercirApp')
+    .filter('inArray', function($filter){
+      return function(list, arrayFilter, element){
+        if(arrayFilter){
+          return $filter('filter')(list, function(listItem){
+            return arrayFilter.indexOf(listItem[element]) !== -1;
+          });
+        }
+      };
+    });
+
+  angular.module('exercirApp')
+    .filter('notInArray', function($filter){
+      return function(list, arrayFilter, element){
+        if(arrayFilter){
+          return $filter('filter')(list, function(listItem){
+            return arrayFilter.indexOf(listItem[element]) === -1;
+          });
+        }
+      };
+    });
 
 }());

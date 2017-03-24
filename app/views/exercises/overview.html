@@ -8,8 +8,14 @@
   </div>
 
   <div class="brick brick--18">
+    <div class="form-required form-group">
+      <label>Trainingsinhalt</label>
+      <tags-input ng-model="search" replace-spaces-with-dashes="false">
+        <auto-complete source="loadTags($query)"></auto-complete>
+      </tags-input>
+    </div>
 
-    <div class="golden-ratio--row row--flex-height exercises--item" ng-repeat="exercise in exercises">
+    <div class="golden-ratio--row row--flex-height exercises--item" ng-repeat="exercise in searchResult | notInArray:filterBy():'$id'">
       <div class="exercises--item__action">
         <button class="narrow" ng-click="removeExercise($index)"><i class="fa fa-trash" aria-hidden="true"></i></button>
         <button class="narrow"><i class="fa fa-clone" aria-hidden="true"></i></button>
