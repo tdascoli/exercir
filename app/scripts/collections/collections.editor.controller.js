@@ -67,7 +67,7 @@ angular.module('exercirApp')
         }
         return false;
       });
-      var docDefinition = PDFMakeService.makeCollectionDFB($scope.training,exercises);
+      var docDefinition = PDFMakeService.makeCollection($scope.training,exercises);
       /*
       var docDefinition = {
         // a string or { width: number, height: number }

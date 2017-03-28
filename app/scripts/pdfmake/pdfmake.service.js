@@ -23,6 +23,12 @@ angular.module('exercirApp')
         }
         i++;
 
+        // Titel
+        collection.push({
+          text: exercise.name,
+          style: 'exerciseHeader'
+        });
+
         // Trainingsinhalt
         var trainingsinhalt='';
         angular.forEach(trainingExercise.content, function(value){
@@ -116,12 +122,13 @@ angular.module('exercirApp')
         pageOrientation: 'portrait',
 
         // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
-        pageMargins: [20, 40],
+        // todo define margin!
+        pageMargins: [40,40],
 
         footer: {columns: [
-          { width: '50%', text: moment($scope.training.timestamp).format('DD.MM.YYYY')+' '+$scope.training.trainer, fontSize: 10 },
+          { width: '50%', text: moment(training.timestamp).format('DD.MM.YYYY')+' '+training.trainer, fontSize: 10 },
           { width: '50%', text: 'exercir © tdascoli', fontSize: 10, alignment: 'right' }
-        ], margin: 20},
+        ], margin: [40, 20]},
 
         content: collections,
         styles: {
@@ -129,11 +136,131 @@ angular.module('exercirApp')
             margin: [0, 20, 0, 0]
           },
           collectionHeader: {
-            fillColor: '#ff0000',
+            fillColor: '#ccd6ea',
             bold: true
+          },
+          exerciseHeader: {
+            fontSize: 12,
+            bold: true,
+            margin: [0, 20, 0, 0]
+          }
+        },
+        defaultStyle: {
+          fontSize: 10
+        }
+      };
+      return docDefinition;
+    }
+
+    function makeCollectionFCL(training,exercises){
+      // rgb(32, 174, 128)
+      var i=0;
+      var collections=[];
+      //moment($scope.training.timestamp).format('DD.MM.YYYY')+' '+$scope.training.trainer
+
+      angular.forEach(training.exercises, function (trainingExercise) {
+        var exercise=getExercise(exercises,trainingExercise.exerciseId);
+
+        var collection=[];
+
+        // PageBreak
+        if (i>0) {
+          collection.push({text: '', pageBreak: 'before'});
+        }
+        i++;
+
+        // Trainingsinhalt
+        var trainingsinhalt='';
+        angular.forEach(trainingExercise.content, function(value){
+          trainingsinhalt+=value.text+', ';
+        });
+        trainingsinhalt=trainingsinhalt.substr(0,(trainingsinhalt.length-2));
+
+        console.log(markdownToPdfmake(exercise.description));
+
+        collection.push({
+          style: 'dfbTrainingTable',
+          border: [false, false, false, false],
+          table: {
+            widths: ['60%','*'],
+            body: [
+              [
+                {rowSpan: 7, image: exercise.graphic, width: 300, border: [false, false, false, false]},
+                {text: [
+                  {text: exercise.name+'\n', style: 'dfbTitle'},
+                  {text: 'von '+training.trainer+' ('+moment(training.timestamp).format('DD.MM.YYYY')+')', style: 'dfbText'}
+                ], border: [false, false, false, false]}
+              ],
+              ['',{text: [{text:'Trainingsinhalt'+'\n', style: 'dfbLabel'},{text: trainingsinhalt, style: 'dfbText'}], border: [false, false, false, false]}],
+              ['',{text: [{text:'Organisation'+'\n', style: 'dfbLabel'},{text:markdownToPdfmake(exercise.description) || '-', style: 'dfbText'}], border: [false, false, false, false]}],
+              ['',{text: [{text:'Ablauf'+'\n', style: 'dfbLabel'},{text:markdownToPdfmake(exercise.aufbau) || '-', style: 'dfbText'}], border: [false, false, false, false]}],
+              ['',{text: [{text:'Variationen'+'\n', style: 'dfbLabel'},{text:markdownToPdfmake(exercise.variationen) || '-', style: 'dfbText'}], border: [false, false, false, false]}],
+              ['',{text: [{text:'Tipps und Korrekturen'+'\n', style: 'dfbLabel'},{text:markdownToPdfmake(exercise.coaching) || '-', style: 'dfbText'}], border: [false, false, false, false]}],
+              ['',{text: [{text:'Bemerkungen'+'\n', style: 'dfbLabel'},{text:markdownToPdfmake(trainingExercise.bemerkungen) || '-', style: 'dfbText'}], border: [false, false, false, false]}]
+            ]
+          }
+        });
+
+        collections.push(collection);
+      });
+
+      var docDefinition = {
+        // a string or { width: number, height: number }
+        pageSize: 'A4',
+
+        // by default we use portrait, you can change it to landscape if you wish
+        pageOrientation: 'portrait',
+
+        // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
+        pageMargins: [40, 110, 40, 20],
+
+        header: [
+          {columns: [
+            { width: '50%', text: ['FC LÄNGGASSE\n','JUNIORENKOMMISSION'], fontSize: 8 },
+            { width: '50%', text: 'FCLAENGGASSE.CH/FCL/NACHWUCHS', fontSize: 14, bold: true, alignment: 'right' }
+          ], margin:  [40, 20]},
+          {
+            style: 'dfbTable',
+            table: {
+              widths: ['100%'],
+              body: [
+                [{text:training.titel, style: 'dfbHeader', border: [false, false, false, false]}]
+              ]
+            }
+          }],
+
+        footer: { text: 'exercir © tdascoli', fontSize: 8, alignment: 'center' },
+
+        content: collections,
+        styles: {
+          dfbTable: {
+            fillColor: '#013299',
+            color: '#ffffff'
+          },
+          dfbTitle: {
+            color: '#013299',
+            fontSize: 12,
+            bold: true
+          },
+          dfbHeader: {
+            margin: [10, 2],
+            fontSize: 14,
+            bold: true
+          },
+          dfbBox: {
+            margin: [20]
+          },
+          dfbLabel: {
+            color: '#013299',
+            fontSize: 10,
+            bold: true
+          },
+          dfbText: {
+            fontSize: 10
           }
         }
       };
+
       return docDefinition;
     }
 
@@ -160,6 +287,8 @@ angular.module('exercirApp')
           trainingsinhalt+=value.text+', ';
         });
         trainingsinhalt=trainingsinhalt.substr(0,(trainingsinhalt.length-2));
+
+        console.log(markdownToPdfmake(exercise.description));
 
         collection.push({
           style: 'dfbTrainingTable',
@@ -249,6 +378,7 @@ angular.module('exercirApp')
 
     return {
       makeCollection: makeCollection,
+      makeCollectionFCL: makeCollectionFCL,
       makeCollectionDFB: makeCollectionDFB
     };
 
