@@ -31,14 +31,15 @@
     <div class="upload">
       <span class="fake-label">Grafik</span>
 
-      <img data-ng-src="{{exercise.graphic}}" data-err-src="images/torschuss.png" ng-if="exercise.graphic" class="upload__image" />
+      <img data-ng-src="{{exercise.graphic}}" ng-if="exercise.graphic" class="upload__image" />
+      <img ng-src="{{exercise.graphicUrl}}" ng-if="exercise.graphicUrl" class="upload__image" /> <!-- data-err-src="images/torschuss.png"  -->
       <img ng-if="picFile" ngf-thumbnail="picFile" class="upload__thumb">
 
       <div class="upload__toolbar">
         <div class="btn-default" ngf-select ng-model="picFile" ngf-multiple="false" accept="image/*" ngf-max-size="2MB" ngf-model-invalid="errorFile">Select File</div>
 
         <button ng-click="picFile = null" ng-show="picFile">Remove</button>
-        <button ng-click="uploadPic(picFile)">Upload</button>
+        <button ng-click="uploadPic(picFile)" ng-show="picFile">Upload</button>
       </div>
     </div>
   </div>

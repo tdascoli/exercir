@@ -2,7 +2,7 @@
   'use strict';
 
 angular.module('exercirApp')
-  .controller('ExercisesCtrl', function ($scope, $sce, $stateParams, $q, Ref, Upload, lodash, exercises) {
+  .controller('ExercisesCtrl', function ($rootScope, $scope, $sce, $stateParams, $q, Ref, Upload, lodash, exercises) {
 
 
     $scope.loadTags = function(query) {
@@ -100,7 +100,42 @@ angular.module('exercirApp')
     $scope.uploadPic = function (file) {
       Upload.base64DataUrl(file).then(function (response) {
         $scope.picFile = null;
-        $scope.exercise.graphic = response;
+
+        var storageRef = firebase.storage().ref();
+        storageRef.child($rootScope.profile.$id+'/'+file.name).putString(response, 'data_url').then(function(snapshot) {
+          $scope.exercise.graphicUrl = snapshot.downloadURL;
+          console.log('Uploaded a data_url!', snapshot.downloadURL);
+        });
+      });
+    };
+
+    function getImageUrl(image) {
+      var storageRef = firebase.storage().ref();
+      var url;
+      var pathReference = storageRef.child(image);
+      return pathReference.getDownloadURL().then(function(url) {
+        return url;
+      }).catch(function(error) {
+        // Handle any errors
+      });
+    }
+    $scope.getImageUrl = function(image) {
+      return $q(function(resolve){
+        var imageUrl = getImageUrl(image).then(function(url) {
+          imageUrl = url;
+          console.log(url);
+          resolve(imageUrl);
+        });
+      });
+    };
+
+    $scope.showImageUrl=function(image){
+      return $q(function(resolve){
+        var storageRef = firebase.storage().ref();
+        storageRef.child(image).getDownloadURL().then(function(url){
+          console.log(url);
+          resolve(url);
+        });
       });
     };
 

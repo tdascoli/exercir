@@ -343,12 +343,17 @@ a.wizard {
   background:#000;
   display: inline-block;
   text-decoration: none;
+  box-shadow: none;
 }
 a.wizard.active {
   background: silver;
 }
 a.wizard:hover {
   background: #e5e5e5;
+}
+
+a.remove-button {
+  box-shadow: none;
 }
 
 .ghost {
