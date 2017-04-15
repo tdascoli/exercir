@@ -34,5 +34,11 @@
   },
   "engines": {
     "node": ">=0.10.0"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "postinstall": "bower install; grunt build"
   }
+
 }
