@@ -257,24 +257,12 @@ module.exports = function (grunt) {
     
     // Compiles Sass with grunt-sass for heroku deployment
 	  sass: {
-	  	options: {
-        sassDir: '<%= yeoman.app %>/styles',
-        cssDir: '.tmp/styles',
-        generatedImagesDir: '.tmp/images/generated',
-        imagesDir: '<%= yeoman.app %>/images',
-        javascriptsDir: '<%= yeoman.app %>/scripts',
-        fontsDir: '<%= yeoman.app %>/styles/fonts',
-        importPath: './bower_components',
-        httpImagesPath: '/images',
-        httpGeneratedImagesPath: '/images/generated',
-        httpFontsPath: '/styles/fonts',
-        relativeAssets: false,
-        assetCacheBuster: false,
-        raw: 'Sass::Script::Number.precision = 10\n'
+      options: {
+        sourcemap: true
       },
 		  dist: {
-        options: {
-          generatedImagesDir: '<%= yeoman.dist %>/images/generated'
+        files: {
+          '<%= yeoman.dist %>/styles/main.css': '<%= yeoman.app %>/styles/main.scss'
         }
 	  	}
 	  },
@@ -437,6 +425,7 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '*.html',
             'images/{,*/}*.{webp}',
+            'css/{,*/}*',
             'styles/fonts/{,*/}*.*'
           ]
         }, {
@@ -470,7 +459,7 @@ module.exports = function (grunt) {
       dist: [
         //'compass:dist',
         //'imagemin',
-        'sass:dist',
+        'sass',
         'svgmin'
       ]
     },
@@ -483,9 +472,6 @@ module.exports = function (grunt) {
       }
     }
   });
-
-  // New Task for Sass via grunt-sass
-  grunt.registerTask('sass', ['sass']);
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
