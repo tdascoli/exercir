@@ -1,6 +1,5 @@
 {
   "name": "exercir",
-  "private": true,
   "dependencies": {
     "autoprefixer-core": "^5.2.1",
     "grunt": "^0.4.5",
@@ -34,7 +33,7 @@
     "grunt-cli": "latest"
   },
   "engines": {
-    "node": "7.8.x"
+    "node": "4.4.4"
   },
   "main": "server.js",
   "scripts": {
