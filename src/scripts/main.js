@@ -79,7 +79,9 @@ function Exercise(){
   self.isExtended = ko.observable(true);
 
   self.varieties = ko.observableArray();
-
+  self.hasVarieties = ko.computed(function(){
+    return (self.varieties().length>0);
+  });
   self.addVariety = function(){
     self.varieties.push(new Variety());
   };

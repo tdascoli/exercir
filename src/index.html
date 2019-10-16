@@ -49,8 +49,22 @@
 
 <!-- content -->
 <div class="container">
-
   <h3 class="mt-3">exercir</h3>
+  <div class="form-group">
+    <div class="custom-control custom-checkbox">
+      <input
+             type="checkbox"
+             class="custom-control-input"
+             name="extended"
+             id="extended"
+             value="true"
+             data-bind="checked: $root.exercise.isExtended">
+      <label class="custom-control-label"
+             for="extended">Erweitert</label>
+    </div>
+  </div>
+
+  <hr />
 
   <div class="d-flex justify-content-between">
 
@@ -165,7 +179,7 @@
           </div>
         </div>
 
-        <button data-bind="click: exercise.addVariety" class="btn btn-default btn-small" type="button">add</button>
+        <button data-bind="click: exercise.addVariety" class="btn btn-default btn-small" type="button">Hinzufügen</button>
       </fieldset>
   <hr />
   <button
@@ -178,7 +192,6 @@
         <div class="image-upload-preview">
           <img data-bind="attr: { src: fileData().dataURL }, visible: fileData().dataURL">
         </div>
-        <p>...image...</p>
         <p data-bind="foreach: exercise.varieties">
           <span class="exercise__paragraph__title" data-bind="text: 'Variante '+$index()"></span>
           ...variety image...
@@ -200,13 +213,13 @@
           <span class="exercise__paragraph__title">Ablauf</span>
           <span data-bind="text: exercise.procedure"></span>
         </p>
-        <div> <!--  data-bind="visible: exercise.hasVarieties" -->
+        <div data-bind="visible: exercise.hasVarieties">
           <span class="exercise__paragraph__title">Varianten</span>
           <p data-bind="foreach: exercise.varieties">
             <span data-bind="text: description"></span>
           </p>
         </div>
-        <p> <!--  data-bind="visible: exercise.isExtended" -->
+        <p data-bind="visible: exercise.isExtended">
           <span class="exercise__paragraph__title">Coaching</span>
           <span data-bind="text: exercise.coaching"></span>
         </p>

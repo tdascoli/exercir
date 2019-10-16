@@ -17,8 +17,7 @@
     "jshint": "^2.8.0"
   },
   "dependencies": {
-    "exceljs": "^1.14.0",
-    "twig": "^1.13.3"
+    "exceljs": "^1.14.0"
   },
   "scripts": {
     "test": "echo \"No test specified\" && exit 1"
