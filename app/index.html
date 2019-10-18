@@ -9,7 +9,9 @@
 
     <meta name="theme-color" content="#ffffff">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daemonite-material@4.1.1/css/material.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/knockout-file-bindings@1.1.0/knockout-file-bindings.css">
     <!-- inject:css -->
     <link rel="stylesheet" href="css/exercir.css">
@@ -58,99 +60,99 @@
   <div class="d-flex justify-content-between">
 
     <div class="w-50">
+
       <div class="form-group">
-      <label for="phase">Spielphase</label>
-      <div class="mt-2" id="phase" data-bind="foreach: phases">
-        <div class="custom-control custom-checkbox">
-            <input
-                type="checkbox"
-                class="custom-control-input"
-                data-bind="attr: { value: id, name: id, id: id }, checked: $root.exercise.phase.selectedPhasesIds">
-            <label class="custom-control-label" data-bind="attr: { for: id }, text: name"></label>
+          <label for="title">Titel</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            name="title"
+            required="required"
+            data-bind="textInput: exercise.title">
         </div>
-      </div>
-    </div>
+
+      <div class="form-group">
+          <label for="image">Bild</label>
+          <div data-bind="fileDrag: exercise.image.fileData">
+            <div class="image-upload-input">
+              <input type="file" data-bind="fileInput: exercise.image.fileData, , customFileInput: {}" id="image" />
+            </div>
+          </div>
+        </div>
+
+      <div class="form-group" data-bind="visible: exercise.isExtended">
+          <label for="organisation">Organisation</label>
+          <textarea
+            class="form-control"
+            id="organisation"
+            name="organisation"
+            rows="3"
+            data-bind="textInput: exercise.organisation"></textarea>
+        </div>
+
+      <div class="form-group">
+          <label for="procedure">Ablauf</label>
+          <textarea
+            class="form-control"
+            id="procedure"
+            name="procedure"
+            rows="3"
+            required="required"
+            data-bind="textInput: exercise.procedure"></textarea>
+        </div>
+
+      <div class="form-group" data-bind="visible: exercise.isExtended">
+          <label for="coaching">Coaching</label>
+          <textarea
+            class="form-control"
+            id="coaching"
+            name="coaching"
+            rows="3"
+            required="required"
+            data-bind="textInput: exercise.coaching"></textarea>
+        </div>
+
+      <div class="form-group">
+              <label for="phase">Spielphase</label>
+              <div class="mt-2" id="phase" data-bind="foreach: phases">
+                <div class="custom-control custom-checkbox">
+                    <input
+                        type="checkbox"
+                        class="custom-control-input"
+                        data-bind="attr: { value: id, name: id, id: id }, checked: $root.exercise.phase.selectedPhasesIds">
+                    <label class="custom-control-label" data-bind="attr: { for: id }, text: name"></label>
+                </div>
+              </div>
+            </div>
 
       <div class="form-group">
         <label for="topic">Thema</label>
-        <div class="card">
-          <div class="card-body">
-            <ul class="exercir__treeview" id="topics" data-bind="foreach: topics">
-          <li>
-            <span data-toggle="collapse" aria-expanded="false" data-bind="attr: {'data-target': '#'+main, 'aria-controls': main }, text: main"></span>
-            <ul data-bind="attr: {id: main}, foreach: $data.topics" class="collapse">
-              <li>
-                <div class="custom-control custom-checkbox">
-                    <input
-                          type="checkbox"
-                          class="custom-control-input"
-                          data-bind="attr: { value: $parent.main+'-'+$index()+'-'+key,
-                                             name: $parent.main+'-'+key,
-                                             id: $parent.main+'-'+key },
-                                     checked: $root.exercise.topic.selectedTopicIds">
-                      <label
-                          class="custom-control-label"
-                          data-bind="attr: { for: $parent.main+'-'+key},
-                                     text: value"></label>
-                  </div>
-                </li>
-            </ul>
-          </li>
-        </ul>
+        <div class="accordion" id="topics" data-bind="foreach: topics">
+          <div class="card">
+            <div class="card-header" data-bind="attr: {id: 'heading-'+main }">
+                <button class="btn btn-link" type="button" data-toggle="collapse" aria-expanded="true" data-bind="attr: {'data-target': '#'+main, 'aria-controls': main }, text: main"></button>
+            </div>
+
+            <div data-bind="attr: {id: main, 'aria-labelledby': 'heading-'+main }" class="collapse" data-parent="#topics">
+              <div class="card-body" data-bind="foreach: $data.topics">
+                    <div class="custom-control custom-checkbox">
+                        <input
+                              type="checkbox"
+                              class="custom-control-input"
+                              data-bind="attr: { value: $parent.main+'-'+$index()+'-'+key,
+                                                 name: $parent.main+'-'+key,
+                                                 id: $parent.main+'-'+key },
+                                         checked: $root.exercise.topic.selectedTopicIds">
+                          <label
+                              class="custom-control-label"
+                              data-bind="attr: { for: $parent.main+'-'+key},
+                                         text: value"></label>
+                      </div>
+                </div>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="form-group">
-        <label for="title">Titel</label>
-        <input
-          type="text"
-          class="form-control"
-          id="title"
-          name="title"
-          required="required"
-          data-bind="textInput: exercise.title">
-      </div>
-
-      <div class="form-group">
-        <label for="image">Bild</label>
-        <div data-bind="fileDrag: fileData">
-          <div class="image-upload-input">
-            <input type="file" data-bind="fileInput: fileData, , customFileInput: {}" id="image" />
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group" data-bind="visible: exercise.isExtended">
-        <label for="organisation">Organisation</label>
-        <textarea
-          class="form-control"
-          id="organisation"
-          name="organisation"
-          rows="3"
-          data-bind="textInput: exercise.organisation"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="procedure">Ablauf</label>
-        <textarea
-          class="form-control"
-          id="procedure"
-          name="procedure"
-          rows="3"
-          required="required"
-          data-bind="textInput: exercise.procedure"></textarea>
-      </div>
-
-      <div class="form-group" data-bind="visible: exercise.isExtended">
-        <label for="coaching">Coaching</label>
-        <textarea
-          class="form-control"
-          id="coaching"
-          name="coaching"
-          rows="3"
-          required="required"
-          data-bind="textInput: exercise.coaching"></textarea>
       </div>
 
       <fieldset>
@@ -172,18 +174,21 @@
           </div>
         </div>
 
-        <button data-bind="click: exercise.addVariety" class="btn btn-default btn-small" type="button">Hinzufügen</button>
+        <button data-bind="click: exercise.addVariety" class="btn btn-secondary btn-small" type="button">Hinzufügen</button>
       </fieldset>
-  <hr />
-  <button
-    type="submit"
-    class="btn btn-primary"
-    data-bind="click: save">Speichern</button>
+      <hr />
+      <button
+        type="submit"
+        class="btn btn-primary"
+        data-bind="click: save">Speichern</button>
+
     </div>
+
+
     <div class="d-flex w-50">
       <div class="w-50">
         <div class="image-upload-preview">
-          <img data-bind="attr: { src: fileData().dataURL }, visible: fileData().dataURL">
+          <img data-bind="attr: { src: exercise.image.fileData().dataURL }, visible: exercise.image.fileData().dataURL">
         </div>
         <p data-bind="foreach: exercise.varieties">
           <span class="exercise__paragraph__title" data-bind="text: 'Variante '+$index()"></span>
@@ -221,13 +226,13 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap.native@2.0.27/dist/bootstrap-native-v4.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/knockout@3.5.0/build/output/knockout-latest.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/knockout.mapping@2.4.3/knockout.mapping.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/knockout-file-bindings@1.1.0/knockout-file-bindings.min.js"></script>
 <!-- inject:js -->
 <script src="scripts/exercir.js"></script>
 <!-- endinject -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap.native@2.0.27/dist/bootstrap-native-v4.js"></script>
 
 </body>
 </html>
