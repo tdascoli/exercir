@@ -15,7 +15,7 @@ var topics = new Map([
 			{ "kopfball" : "Kopfball"}
 		]],
 	["TA", [
-		  	{ "1vs1" : "1:1"},
+		  { "1vs1" : "1:1"},
 			{ "spielaufbau" : "Spielaufbau"},
 			{ "abschluss" : "Abschluss"},
 			{ "toreverhindern" : "Tore verhindern"},
@@ -44,7 +44,8 @@ function Topic(){
 
   self.selectedTopicIds = ko.observableArray();
   self.selectedTopics = ko.computed(function() {
-    return ko.utils.arrayMap(self.selectedTopicIds(),                           function(id) {
+    return ko.utils.arrayMap(self.selectedTopicIds(),
+    function(id) {
       var index = id.split("-");
       var main = index[0];
       var topic = topics.get(main)[index[1]][index[2]];
@@ -58,7 +59,8 @@ function Phase(){
 
   self.selectedPhasesIds = ko.observableArray();
   self.selectedPhases = ko.computed(function() {
-    return ko.utils.arrayMap(self.selectedPhasesIds(),                      function(id) {
+    return ko.utils.arrayMap(self.selectedPhasesIds(),
+      function(id) {
       return phases.get(id);
     });
   });

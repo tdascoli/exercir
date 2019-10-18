@@ -13,7 +13,7 @@ gulp.task('watch', function () {
 
     gulp.watch("src/scss/*.scss", gulp.series('sass'));
     gulp.watch("src/scripts/*.js", gulp.series('js'));
-    gulp.watch("src/**/*.html", gulp.series('html'));
+    gulp.watch("src/**/*.html", gulp.series('html','inject'));
     gulp.watch(["app/**/*"]).on('change', browserSync.reload);
 });
 
@@ -33,16 +33,6 @@ gulp.task('sass', function() {
         .pipe(browserSync.stream());
 });
 
-gulp.task('inject', () => {
-  return gulp.src(['./app/*.html'])
-          .pipe(inject(gulp.src(['./app/**/*.js',
-                                 './app/**/*.css'],
-                                 {read: false}), {relative: true}))
-          .pipe(gulp.dest('./app'))
-          .pipe(browserSync.stream());
-});
-
-
 gulp.task('js', function() {
   return gulp.src('src/**/*.js').pipe(minify({
     minify: true,
@@ -60,19 +50,18 @@ gulp.task('js', function() {
 
 gulp.task('html', function(){
   return gulp.src('src/*.html')
-    .pipe(minify({
-      minify: true,
-      minifyHTML: {
-        collapseWhitespace: true,
-        conservativeCollapse: true,
-      },
-      getKeptComment: function (content, filePath) {
-          var m = content.match(/\/\*![\s\S]*?\*\//img);
-          return m && m.join('\n') + '\n' || '';
-      }
-    }))
     .pipe(gulp.dest('app/'))
     .pipe(browserSync.stream());
+});
+
+gulp.task('inject', () => {
+  return gulp.src(['./app/*.html'])
+          .pipe(inject(gulp.src(['./app/**/*.js',
+                                 './app/**/*.css'],
+                                 {read: false}),
+                                 {relative: true}))
+          .pipe(gulp.dest('./app'))
+          .pipe(browserSync.stream());
 });
 
 gulp.task('default', gulp.series('js','sass','html','inject','watch'));
