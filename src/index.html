@@ -8,22 +8,12 @@
     <title>exercir</title>
 
     <meta name="theme-color" content="#ffffff">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="apple-touch-icon" href="icon.png">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
     <!-- styles:css -->
     <link media="all" rel="stylesheet" href="css/exercir.css" />
     <!-- endinject -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/knockout-file-bindings@1.1.0/knockout-file-bindings.css">
-
-    <!-- inject:js -->
-    <script type="application/javascript" src="scripts/main.js"></script>
-    <!-- endinject -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap.native@2.0.27/dist/bootstrap-native.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/knockout@3.5.0/build/output/knockout-latest.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/knockout.mapping@2.4.3/knockout.mapping.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/knockout-file-bindings@1.1.0/knockout-file-bindings.min.js"></script>
-
 </head>
 <body>
 <!--[if IE]>
@@ -84,7 +74,9 @@
 
       <div class="form-group">
         <label for="topic">Thema</label>
-        <ul class="exercir__treeview" id="topics" data-bind="foreach: topics">
+        <div class="card">
+          <div class="card-body">
+            <ul class="exercir__treeview" id="topics" data-bind="foreach: topics">
           <li>
             <span data-toggle="collapse" data-bind="attr: {'data-target': '#'+main }, text: main"></span>
             <ul data-bind="attr: {id: main}, foreach: $data.topics" class="collapse2">
@@ -106,6 +98,8 @@
             </ul>
           </li>
         </ul>
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
@@ -227,6 +221,14 @@
     </div>
   </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap.native@2.0.27/dist/bootstrap-native.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/knockout@3.5.0/build/output/knockout-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/knockout.mapping@2.4.3/knockout.mapping.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/knockout-file-bindings@1.1.0/knockout-file-bindings.min.js"></script>
+<!-- inject:js -->
+<script type="application/javascript" src="scripts/main.js"></script>
+<!-- endinject -->
 
 </body>
 </html>
