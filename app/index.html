@@ -205,21 +205,21 @@
         <h2 data-bind="text: exercise.title"></h2>
         <p data-bind="visible: exercise.isExtended">
           <span class="exercise__paragraph__title">Organisation</span>
-          <span class="exercise__paragraph__content" data-bind="text: exercise.organisation"></span>
+          <span class="exercise__paragraph__content" data-bind="markdown: exercise.organisation"></span>
         </p>
         <p>
           <span class="exercise__paragraph__title">Ablauf</span>
-          <span data-bind="text: exercise.procedure"></span>
+          <span data-bind="markdown: exercise.procedure"></span>
         </p>
         <div data-bind="visible: exercise.hasVarieties">
           <span class="exercise__paragraph__title">Varianten</span>
           <p data-bind="foreach: exercise.varieties">
-            <span data-bind="text: description"></span>
+            <span data-bind="markdown: description"></span>
           </p>
         </div>
         <p data-bind="visible: exercise.isExtended">
           <span class="exercise__paragraph__title">Coaching</span>
-          <span data-bind="text: exercise.coaching"></span>
+          <span data-bind="markdown: exercise.coaching"></span>
         </p>
       </div>
     </div>
@@ -229,6 +229,8 @@
 <script src="https://cdn.jsdelivr.net/npm/knockout@3.5.0/build/output/knockout-latest.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/knockout.mapping@2.4.3/knockout.mapping.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/knockout-file-bindings@1.1.0/knockout-file-bindings.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/grofit/knockout.markdown/src/knockout.markdown.min.js"></script>
 <!-- inject:js -->
 <script src="scripts/exercir.js"></script>
 <!-- endinject -->

@@ -75,7 +75,7 @@ function File(){
 function Variety(){
   var self = this;
 
-  self.description = ko.observable();
+  self.description = ko.observable('');
   self.image = ko.observable();
 };
 
@@ -113,9 +113,9 @@ function Exercise(){
   self.topic = new Topic();
 
   self.title = ko.observable();
-  self.organisation = ko.observable();
-  self.procedure = ko.observable();
-  self.coaching = ko.observable();
+  self.organisation = ko.observable('');
+  self.procedure = ko.observable('');
+  self.coaching = ko.observable('');
   self.image = new File();
 
   self.isExtended = ko.observable(true);
