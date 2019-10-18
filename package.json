@@ -3,10 +3,11 @@
   "devDependencies": {
     "browser-sync": "^2.26.7",
     "gulp": "^4.0.2",
+    "gulp-html": "^0.8.1",
     "gulp-inject": "^5.0.4",
+    "gulp-minifier": "^2.0.0",
     "gulp-sass": "^4.0.2"
   },
-  "dependencies": {},
   "scripts": {
     "test": "echo \"No test specified\" && exit 1"
   },
