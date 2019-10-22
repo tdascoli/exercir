@@ -1,0 +1,15 @@
+{
+    "name": "dat/exercir",
+    "description": "exercir api",
+    "authors": [
+        {
+            "name": "tdascoli",
+            "email": "thomas@dasco.li"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^3.4",
+        "tuupola/slim-basic-auth": "^3.2",
+        "slim/slim": "^3.12"
+    }
+}
