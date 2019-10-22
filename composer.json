@@ -10,6 +10,7 @@
     "require": {
         "vlucas/phpdotenv": "^3.4",
         "tuupola/slim-basic-auth": "^3.2",
-        "slim/slim": "^3.12"
+        "slim/slim": "^3.12",
+        "rakibtg/sleekdb": "^1.5"
     }
 }
