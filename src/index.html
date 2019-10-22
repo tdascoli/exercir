@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="de">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -16,223 +17,220 @@
     <!-- inject:css -->
     <!-- endinject -->
 </head>
+
 <body>
-<!--[if IE]>
-  <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-<![endif]-->
+    <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand" href="./">exercir</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="./">exercir</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="./">exercir <span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<div class="container">
-  <h3 class="mt-3">exercir</h3>
-  <div class="form-group">
-    <div class="custom-control custom-checkbox">
-      <input
-             type="checkbox"
-             class="custom-control-input"
-             name="extended"
-             id="extended"
-             value="true"
-             data-bind="checked: $root.exercise.isExtended">
-      <label class="custom-control-label"
-             for="extended">Erweitert</label>
-    </div>
-  </div>
-
-  <hr />
-
-  <div class="d-flex justify-content-between">
-
-    <div class="w-50">
-
-      <div class="form-group">
-          <label for="title">Titel</label>
-          <input
-            type="text"
-            class="form-control"
-            id="title"
-            name="title"
-            required="required"
-            data-bind="textInput: exercise.title">
-        </div>
-
-      <div class="form-group">
-          <label for="image">Bild</label>
-          <div data-bind="fileDrag: exercise.image.fileData">
-            <div class="image-upload-input">
-              <input type="file" data-bind="fileInput: exercise.image.fileData, , customFileInput: {}" id="image" />
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="./">exercir <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
             </div>
-          </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+      <h3 class="mt-3">übung erfassen</h3>
+
+        <div class="form-group">
+            <label for="title">Titel</label>
+            <input type="text" class="form-control" id="title" name="title" required="required" placeholder="Titel" data-bind="textInput: exercise.title">
+        </div>
+        <div class="form-group">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="extended" id="extended" value="true" data-bind="checked: $root.exercise.isExtended">
+                <label class="custom-control-label" for="extended">Erweitert</label>
+            </div>
         </div>
 
-      <div class="form-group" data-bind="visible: exercise.isExtended">
-          <label for="organisation">Organisation</label>
-          <textarea
-            class="form-control"
-            id="organisation"
-            name="organisation"
-            rows="3"
-            data-bind="textInput: exercise.organisation"></textarea>
-        </div>
+        <hr />
+        <!-- ko if: exercise.isExtended -->
+        <div class="d-flex justify-content-between">
 
-      <div class="form-group">
-          <label for="procedure">Ablauf</label>
-          <textarea
-            class="form-control"
-            id="procedure"
-            name="procedure"
-            rows="3"
-            required="required"
-            data-bind="textInput: exercise.procedure"></textarea>
-        </div>
-
-      <div class="form-group" data-bind="visible: exercise.isExtended">
-          <label for="coaching">Coaching</label>
-          <textarea
-            class="form-control"
-            id="coaching"
-            name="coaching"
-            rows="3"
-            required="required"
-            data-bind="textInput: exercise.coaching"></textarea>
-        </div>
-
-      <div class="form-group">
+          <div class="w-25 form-group">
               <label for="phase">Spielphase</label>
               <div class="mt-2" id="phase" data-bind="foreach: phases">
-                <div class="custom-control custom-checkbox">
-                    <input
-                        type="checkbox"
-                        class="custom-control-input"
-                        data-bind="attr: { value: id, name: id, id: id }, checked: $root.exercise.phase.selectedPhasesIds">
-                    <label class="custom-control-label" data-bind="attr: { for: id }, text: name"></label>
-                </div>
+                  <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" data-bind="attr: { value: id, name: id, id: id }, checked: $root.exercise.phase.selectedPhasesIds">
+                      <label class="custom-control-label" data-bind="attr: { for: id }, text: name"></label>
+                  </div>
               </div>
-            </div>
+          </div>
 
-      <div class="form-group">
-        <label for="topic">Thema</label>
-        <div class="accordion" id="topics" data-bind="foreach: topics">
-          <div class="card">
-            <div class="card-header" data-bind="attr: {id: 'heading-'+main }">
-                <button class="btn btn-link" type="button" data-toggle="collapse" aria-expanded="true" data-bind="attr: {'data-target': '#'+main, 'aria-controls': main }, text: main"></button>
-            </div>
+          <div class="w-50 d-flex">
 
-            <div data-bind="attr: {id: main, 'aria-labelledby': 'heading-'+main }" class="collapse" data-parent="#topics">
-              <div class="card-body" data-bind="foreach: $data.topics">
-                    <div class="custom-control custom-checkbox">
-                        <input
-                              type="checkbox"
-                              class="custom-control-input"
-                              data-bind="attr: { value: $parent.main+'-'+$index()+'-'+key,
-                                                 name: $parent.main+'-'+key,
-                                                 id: $parent.main+'-'+key },
-                                         checked: $root.exercise.topic.selectedTopicIds">
-                          <label
-                              class="custom-control-label"
-                              data-bind="attr: { for: $parent.main+'-'+key},
-                                         text: value"></label>
+            <pre>
+              [_*TE*_]  -->
+              [  TA  ]
+              [  KO  ]
+              [  Kognitiv  ]
+            </pre>
+
+            <pre>
+              [_] Passspiel
+              [_] Ballmitnahme
+              [_] 1. BK
+              [_] Unter druck
+              [_] Torschuss
+              [_] Dribbling
+              [_] Kopfball
+            </pre>
+
+          </div>
+
+          <div class="w-25 form-group">
+              <label for="topic">Thema</label>
+              <div class="accordion" id="topics" data-bind="foreach: topics">
+                  <div class="card">
+                      <div class="card-header" data-bind="attr: {id: 'heading-'+main }">
+                          <button class="btn btn-link" type="button" data-toggle="collapse" aria-expanded="true" data-bind="attr: {'data-target': '#'+main, 'aria-controls': main }, text: main"></button>
                       </div>
+
+                      <div data-bind="attr: {id: main, 'aria-labelledby': 'heading-'+main }" class="collapse" data-parent="#topics">
+                          <div class="card-body" data-bind="foreach: $data.topics">
+                              <div class="custom-control custom-checkbox">
+                                  <input type="checkbox" class="custom-control-input" data-bind="attr: { value: $parent.main+'-'+$index()+'-'+key,
+                                                                               name: $parent.main+'-'+key,
+                                                                               id: $parent.main+'-'+key },
+                                                                               checked: $root.exercise.topic.selectedTopicIds">
+                                  <label class="custom-control-label" data-bind="attr: { for: $parent.main+'-'+key},
+                                                               text: value"></label>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+        </div>
+        <hr />
+        <!-- /ko -->
+
+        <div class="d-flex justify-content-between">
+
+            <div class="w-50">
+
+                <div class="form-group">
+                    <label for="image">Bild</label>
+                    <div data-bind="fileDrag: exercise.image.fileData">
+                        <div class="image-upload-input">
+                            <input type="file" data-bind="fileInput: exercise.image.fileData, , customFileInput: {}" id="image" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="w-50">
+
+                <div class="form-group" data-bind="visible: exercise.isExtended">
+                    <label for="organisation">Organisation</label>
+                    <textarea class="form-control" id="organisation" name="organisation" rows="3" data-bind="textInput: exercise.organisation"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="procedure">Ablauf</label>
+                    <textarea class="form-control" id="procedure" name="procedure" rows="3" required="required" data-bind="textInput: exercise.procedure"></textarea>
+                </div>
+
+                <div class="form-group" data-bind="visible: exercise.isExtended">
+                    <label for="coaching">Coaching</label>
+                    <textarea class="form-control" id="coaching" name="coaching" rows="3" required="required" data-bind="textInput: exercise.coaching"></textarea>
                 </div>
             </div>
-          </div>
+
         </div>
-      </div>
 
-      <fieldset>
-        <legend>Variante</legend>
+        <hr />
 
-        <div class="exercise__variety" data-bind="foreach: exercise.varieties">
-          <div class="form-group">
-            <label data-bind="attr: { for: 'description'+$index()}">Variante</label>
-            <textarea
-              class="form-control"
-              rows="3"
-              data-bind="attr: { name: 'description'+$index(), id: 'description'+$index()}, textInput: description"></textarea>
-          </div>
-          <div class="form-group">
-            <div class="custom-file">
-              <input data-bind="attr: { id: 'image'+$index(), name: 'image'+$index()}" type="file" class="custom-file-input" />
-              <label class="custom-file-label" data-bind="attr: { for: 'image'+$index()}">Bild</label>
+        <h3>Varianten <button data-bind="click: exercise.addVariety" class="btn btn-secondary btn-small" type="button">Hinzufügen</button></h3>
+        <!-- ko foreach: exercise.varieties -->
+        <div class="d-flex justify-content-between">
+
+            <div class="w-50">
+                <div class="form-group">
+                    <div class="custom-file">
+                        <input data-bind="attr: { id: 'image'+$index(), name: 'image'+$index()}" type="file" class="custom-file-input" />
+                        <label class="custom-file-label" data-bind="attr: { for: 'image'+$index()}">Bild</label>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="w-50">
+
+                <div class="exercise__variety">
+                    <div class="form-group">
+                        <label data-bind="attr: { for: 'description'+$index()}">Beschreibung</label>
+                        <textarea class="form-control" rows="3" data-bind="attr: { name: 'description'+$index(), id: 'description'+$index()}, textInput: description"></textarea>
+                    </div>
+                </div>
+
+            </div>
         </div>
+        <!-- /ko -->
+        <hr />
+        <button type="submit" class="btn btn-primary" data-bind="click: save">Speichern</button>
 
-        <button data-bind="click: exercise.addVariety" class="btn btn-secondary btn-small" type="button">Hinzufügen</button>
-      </fieldset>
-      <hr />
-      <button
-        type="submit"
-        class="btn btn-primary"
-        data-bind="click: save">Speichern</button>
+        <hr />
 
+        <div class="d-flex">
+            <div class="w-50">
+                <div class="image-upload-preview">
+                    <img data-bind="attr: { src: exercise.image.fileData().dataURL }, visible: exercise.image.fileData().dataURL">
+                </div>
+                <p data-bind="foreach: exercise.varieties">
+                    <span class="exercise__paragraph__title" data-bind="text: 'Variante '+$index()"></span> ...variety image...
+                </p>
+            </div>
+            <div class="w-50">
+                <ul class="exercise__phases" data-bind="foreach: exercise.phase.selectedPhases">
+                    <li class="exercise__phase"><span data-bind="text: name"></span></li>
+                </ul>
+                <ul class="exercise__topic" data-bind="foreach: exercise.topic.selectedTopics">
+                    <li><span data-bind="text: $data"></span></li>
+                </ul>
+                <h2 data-bind="text: exercise.title"></h2>
+                <p data-bind="visible: exercise.isExtended">
+                    <span class="exercise__paragraph__title">Organisation</span>
+                    <span class="exercise__paragraph__content" data-bind="markdown: exercise.organisation"></span>
+                </p>
+                <p>
+                    <span class="exercise__paragraph__title">Ablauf</span>
+                    <span data-bind="markdown: exercise.procedure"></span>
+                </p>
+                <div data-bind="visible: exercise.hasVarieties">
+                    <span class="exercise__paragraph__title">Varianten</span>
+                    <p data-bind="foreach: exercise.varieties">
+                        <span data-bind="markdown: description"></span>
+                    </p>
+                </div>
+                <p data-bind="visible: exercise.isExtended">
+                    <span class="exercise__paragraph__title">Coaching</span>
+                    <span data-bind="markdown: exercise.coaching"></span>
+                </p>
+            </div>
+        </div>
     </div>
 
-
-    <div class="d-flex w-50">
-      <div class="w-50">
-        <div class="image-upload-preview">
-          <img data-bind="attr: { src: exercise.image.fileData().dataURL }, visible: exercise.image.fileData().dataURL">
-        </div>
-        <p data-bind="foreach: exercise.varieties">
-          <span class="exercise__paragraph__title" data-bind="text: 'Variante '+$index()"></span>
-          ...variety image...
-        </p>
-      </div>
-      <div class="w-50">
-        <ul class="exercise__phases" data-bind="foreach: exercise.phase.selectedPhases">
-          <li class="exercise__phase"><span data-bind="text: name"></span></li>
-        </ul>
-        <ul class="exercise__topic" data-bind="foreach: exercise.topic.selectedTopics">
-          <li><span data-bind="text: $data"></span></li>
-        </ul>
-        <h2 data-bind="text: exercise.title"></h2>
-        <p data-bind="visible: exercise.isExtended">
-          <span class="exercise__paragraph__title">Organisation</span>
-          <span class="exercise__paragraph__content" data-bind="markdown: exercise.organisation"></span>
-        </p>
-        <p>
-          <span class="exercise__paragraph__title">Ablauf</span>
-          <span data-bind="markdown: exercise.procedure"></span>
-        </p>
-        <div data-bind="visible: exercise.hasVarieties">
-          <span class="exercise__paragraph__title">Varianten</span>
-          <p data-bind="foreach: exercise.varieties">
-            <span data-bind="markdown: description"></span>
-          </p>
-        </div>
-        <p data-bind="visible: exercise.isExtended">
-          <span class="exercise__paragraph__title">Coaching</span>
-          <span data-bind="markdown: exercise.coaching"></span>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/knockout@3.5.0/build/output/knockout-latest.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/knockout.mapping@2.4.3/knockout.mapping.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/knockout-file-bindings@1.1.0/knockout-file-bindings.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/grofit/knockout.markdown/src/knockout.markdown.min.js"></script>
-<!-- inject:js -->
-<!-- endinject -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap.native@2.0.27/dist/bootstrap-native-v4.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/knockout@3.5.0/build/output/knockout-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/knockout.mapping@2.4.3/knockout.mapping.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/knockout-file-bindings@1.1.0/knockout-file-bindings.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/grofit/knockout.markdown/src/knockout.markdown.min.js"></script>
+    <!-- inject:js -->
+    <!-- endinject -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap.native@2.0.27/dist/bootstrap-native-v4.js"></script>
 
 </body>
+
 </html>
