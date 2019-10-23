@@ -69,50 +69,24 @@
               </div>
           </div>
 
-          <div class="w-50 d-flex">
-
-            <pre>
-              [_*TE*_]  -->
-              [  TA  ]
-              [  KO  ]
-              [  Kognitiv  ]
-            </pre>
-
-            <pre>
-              [_] Passspiel
-              [_] Ballmitnahme
-              [_] 1. BK
-              [_] Unter druck
-              [_] Torschuss
-              [_] Dribbling
-              [_] Kopfball
-            </pre>
-
-          </div>
-
+          <!-- ko foreach: topics -->
           <div class="w-25 form-group">
-              <label for="topic">Thema</label>
-              <div class="accordion" id="topics" data-bind="foreach: topics">
-                  <div class="card">
-                      <div class="card-header" data-bind="attr: {id: 'heading-'+main }">
-                          <button class="btn btn-link" type="button" data-toggle="collapse" aria-expanded="true" data-bind="attr: {'data-target': '#'+main, 'aria-controls': main }, text: main"></button>
-                      </div>
-
-                      <div data-bind="attr: {id: main, 'aria-labelledby': 'heading-'+main }" class="collapse" data-parent="#topics">
-                          <div class="card-body" data-bind="foreach: $data.topics">
-                              <div class="custom-control custom-checkbox">
-                                  <input type="checkbox" class="custom-control-input" data-bind="attr: { value: $parent.main+'-'+$index()+'-'+key,
-                                                                               name: $parent.main+'-'+key,
-                                                                               id: $parent.main+'-'+key },
-                                                                               checked: $root.exercise.topic.selectedTopicIds">
-                                  <label class="custom-control-label" data-bind="attr: { for: $parent.main+'-'+key},
-                                                               text: value"></label>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
+              <label data-bind="attr: { for: 'topic_'+main }, text: 'Thema '+main"></label>
+              <div class="mt-2" data-bind="attr: { id: 'topic_'+main }, foreach: $data.topics">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox"
+                           class="custom-control-input"
+                           data-bind="attr: { value: $parent.main+'-'+$index()+'-'+key,
+                                      name: $parent.main+'-'+key,
+                                      id: $parent.main+'-'+key },
+                                      checked: $root.exercise.topic.selectedTopicIds">
+                    <label class="custom-control-label"
+                           data-bind="attr: { for: $parent.main+'-'+key},
+                                      text: value"></label>
+                </div>
               </div>
           </div>
+          <!-- /ko -->
 
         </div>
         <hr />
@@ -120,7 +94,7 @@
 
         <div class="d-flex justify-content-between">
 
-            <div class="w-50">
+            <div class="w-50 mr-2">
 
                 <div class="form-group">
                     <label for="image">Bild</label>
@@ -128,11 +102,14 @@
                         <div class="image-upload-input">
                             <input type="file" data-bind="fileInput: exercise.image.fileData, , customFileInput: {}" id="image" />
                         </div>
+                        <div class="image-upload-preview">
+                            <img class="mt-2" data-bind="attr: { src: exercise.image.fileData().dataURL }, visible: exercise.image.fileData().dataURL">
+                        </div>
                     </div>
                 </div>
 
             </div>
-            <div class="w-50">
+            <div class="w-50 ml-2">
 
                 <div class="form-group" data-bind="visible: exercise.isExtended">
                     <label for="organisation">Organisation</label>
@@ -158,23 +135,26 @@
         <!-- ko foreach: exercise.varieties -->
         <div class="d-flex justify-content-between">
 
-            <div class="w-50">
-                <div class="form-group">
-                    <div class="custom-file">
-                        <input data-bind="attr: { id: 'image'+$index(), name: 'image'+$index()}" type="file" class="custom-file-input" />
-                        <label class="custom-file-label" data-bind="attr: { for: 'image'+$index()}">Bild</label>
-                    </div>
-                </div>
+            <div class="w-50 mr-2">
+              <div class="form-group">
+                  <label for="image">Bild</label>
+                  <div data-bind="fileDrag: image.fileData">
+                      <div class="image-upload-input">
+                          <input type="file" data-bind="fileInput: image.fileData, , customFileInput: {}" data-bind="attr: { id: 'image'+$index(), name: 'image'+$index()}" />
+                      </div>
+                      <div class="image-upload-preview">
+                          <img class="mt-2" data-bind="attr: { src: image.fileData().dataURL }, visible: image.fileData().dataURL">
+                      </div>
+                  </div>
+              </div>
             </div>
-            <div class="w-50">
-
+            <div class="w-50 ml-2">
                 <div class="exercise__variety">
                     <div class="form-group">
                         <label data-bind="attr: { for: 'description'+$index()}">Beschreibung</label>
                         <textarea class="form-control" rows="3" data-bind="attr: { name: 'description'+$index(), id: 'description'+$index()}, textInput: description"></textarea>
                     </div>
                 </div>
-
             </div>
         </div>
         <!-- /ko -->
@@ -184,15 +164,18 @@
         <hr />
 
         <div class="d-flex">
-            <div class="w-50">
+            <div class="w-50 mr-2">
                 <div class="image-upload-preview">
                     <img data-bind="attr: { src: exercise.image.fileData().dataURL }, visible: exercise.image.fileData().dataURL">
                 </div>
-                <p data-bind="foreach: exercise.varieties">
-                    <span class="exercise__paragraph__title" data-bind="text: 'Variante '+$index()"></span> ...variety image...
-                </p>
+                <div data-bind="foreach: exercise.varieties">
+                    <span class="exercise__paragraph__title">Varianten</span>
+                    <div class="image-upload-preview">
+                        <img data-bind="attr: { src: image.fileData().dataURL }, visible: image.fileData().dataURL">
+                    </div>
+                </div>
             </div>
-            <div class="w-50">
+            <div class="w-50 ml-2">
                 <ul class="exercise__phases" data-bind="foreach: exercise.phase.selectedPhases">
                     <li class="exercise__phase"><span data-bind="text: name"></span></li>
                 </ul>
