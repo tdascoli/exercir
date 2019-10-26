@@ -21,15 +21,9 @@ $app->add(new Tuupola\Middleware\HttpBasicAuthentication([
 ]));
 
 // Add routes
-$app->get('/exercise/{id}', function (Request $request, Response $response, $args) {
-    $id = $args['id'];
-    return $response->withJson(json_decode('{ "id" : "'.$id.'" }'));
-});
+$app->put('/exercise/{id}', Storage::class . ':save');
 
-$app->put('/exercise', function (Request $request, Response $response, $args) {
-    $body = $request->getBody();
-    return $response->withJson(json_decode($body));
-});
+$app->get('/exercise/{id}', Storage::class . ':load');
 
 $app->run();
 ?>

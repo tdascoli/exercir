@@ -131,7 +131,18 @@ function ExercirViewModel(){
   });
 
   self.save = function(){
-    console.log('save',ko.toJSON(self.exercise));
+    var exercise = {
+        "uuid":self.exercise.uuid,
+        "title":self.exercise.title,
+        "organisation":self.exercise.organisation,
+        "procedure":self.exercise.procedure,
+        "coaching":self.exercise.coaching,
+        "image":self.exercise.image,
+        "phase":self.exercise.phase.selectedPhasesIds,
+        "topic":self.exercise.topic.selectedTopicIds,
+        "varieties":[]
+    };
+    console.log('save',ko.toJSON(exercise));
   };
 };
 
