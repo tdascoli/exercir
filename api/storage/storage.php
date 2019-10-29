@@ -2,6 +2,7 @@
 namespace Exercir\Storage;
 
 use Psr\Container\ContainerInterface;
+use SleekDB\SleekDB as DB;
 
 class Storage {
 
@@ -10,7 +11,7 @@ class Storage {
   public function __construct(ContainerInterface $container) {
     $this->container = $container;
     // ENV
-    $dotenv = Dotenv\Dotenv::create(__DIR__);
+    $dotenv = Dotenv\Dotenv::create(__DIR__ .'/../');
     $dotenv->load();
   }
 
