@@ -7,11 +7,6 @@
             "email": "thomas@dasco.li"
         }
     ],
-    "autoload": {
-        "psr-4": {
-            "Exercir\\": "api/storage/storage.php"
-        }
-    },
     "require": {
         "vlucas/phpdotenv": "^3.4",
         "tuupola/slim-basic-auth": "^3.2",
