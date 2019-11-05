@@ -34,24 +34,27 @@ $app->get('/exercise/{id}', function (Request $request, Response $response, $arg
     }
     return $newResponse;
 });
+
 $app->put('/exercise[/{id}]', function (Request $request, Response $response, $args) {
     $store = prepare();
     $body = $request->getBody();
-    $data = json_decode($body);
+    $data = json_decode($body, JSON_PRETTY_PRINT);
 
     if (\array_key_exists('id', $args)){
       $id = $args['id'];
-      $exc = $store->where('uuid','=',$id)->fetch();
+      $exc = $store->where('_id','=',$id)->fetch();
       if (\count($exc)>0){
-        $store->where('uuid','=',$id)->update($data);
+        $store->where('_id','=',$id)->update($data);
       }
-      // else 404 oder insert??
+      else{
+        return $response->withStatus(404);
+      }
     }
     else {
       $exc = $store->insert($data);
     }
 
-    return $response->withJson(json_decode($exc));
+    return $response->withJson(json_encode($exc, JSON_PRETTY_PRINT));
 });
 
 $app->run();
@@ -64,11 +67,17 @@ function prepare(){
 }
 function collect($id){
   $store = prepare();
-  $data = $store->where('uuid','=',$id)->fetch();
-  // TODO: what about more than one result??
+  $whereId = "uuid";
+  if (is_numeric($id)){
+    $whereId = "_id";
+  }
+  $data = $store->where($whereId,'=',$id)->fetch();
   if (count($data)==0){
     return NULL;
   }
-  return \json_encode($data[0]['form'], JSON_PRETTY_PRINT);
+  else if (count($data)==1){
+    return \json_encode($data[0], JSON_PRETTY_PRINT);
+  }
+  return \json_encode($data, JSON_PRETTY_PRINT);
 }
 ?>

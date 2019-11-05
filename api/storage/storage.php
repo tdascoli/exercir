@@ -18,27 +18,28 @@ class Storage {
   public function save($request, $response, $args) {
     $store = self::prepare();
     $body = $request->getBody();
-    $data = json_decode($body);
+    $data = json_decode($body, JSON_PRETTY_PRINT);
 
     if (\array_key_exists('id', $args)){
       $id = $args['id'];
-      $exc = $store->where('uuid','=',$id)->fetch();
+      $exc = $store->where('_id','=',$id)->fetch();
       if (\count($exc)>0){
-        $store->where('uuid','=',$id)->update($data);
+        $store->where('_id','=',$id)->update($data);
+      }
+      else{
+        return $response->withStatus(404);
       }
     }
     else {
       $exc = $store->insert($data);
     }
 
-    // todo error!!!
-    $response->withStatus(404);
-    return $response;
+    return $response->withJson(json_encode($exc, JSON_PRETTY_PRINT));
   }
 
   public function load($request, $response, $args) {
     $id = $args['id'];
-    $data = $this->collect($id);
+    $data = self::collect($id);
 
     if (!empty($data)){
       $newResponse = $response->withJson(json_decode($data));
@@ -49,14 +50,20 @@ class Storage {
     return $newResponse;
   }
 
-  private function collect($id){
+  private static function collect($id){
     $store = self::prepare();
-    $data = $store->where('uuid','=',$id)->fetch();
-    // TODO: what about more than one result??
+    $whereId = "uuid";
+    if (is_numeric($id)){
+      $whereId = "_id";
+    }
+    $data = $store->where($whereId,'=',$id)->fetch();
     if (count($data)==0){
       return NULL;
     }
-    return \json_encode($data[0]['form'], JSON_PRETTY_PRINT);
+    else if (count($data)==1){
+      return \json_encode($data[0], JSON_PRETTY_PRINT);
+    }
+    return \json_encode($data, JSON_PRETTY_PRINT);
   }
 
   private static function prepare(){

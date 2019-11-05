@@ -1,3 +1,8 @@
+# Check for cached image in cache folder.
+RewriteCond %{REQUEST_METHOD} ^GET$
+RewriteCond %{DOCUMENT_ROOT}/cache/%{REQUEST_URI} -f
+RewriteRule ^(.*)$ /cache/$1 [L,QSA]
+
 RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-f
