@@ -18,3 +18,9 @@ A List of all Dependencies used by this Library.
 * https://github.com/tdascoli/forms-engine -> renderer.js
 * require.js!
 * see https://codepen.io/tdascoli/pen/MWgzYYa
+
+**REST API***
+
+* https://github.com/tuupola/slim-image-resize
+* https://github.com/tuupola/slim-basic-auth
+* https://github.com/tuupola/slim-jwt-auth
