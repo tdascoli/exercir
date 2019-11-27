@@ -25,3 +25,4 @@ A List of all Dependencies used by this Library.
 * https://github.com/tuupola/slim-basic-auth
 * https://github.com/tuupola/slim-jwt-auth
 * https://glide.thephpleague.com/
+* https://www.startutorial.com/articles/view/dynamic-image-resizing-via-uri-with-glide-and-slim
